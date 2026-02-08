@@ -1,0 +1,167 @@
+{
+  "persona_id": "test-002",
+  "persona_name": "Marcus — Advanced Martial Artist, Full Gym",
+  "description": "28-year-old competitive BJJ fighter, advanced trainee, full commercial gym, shoulder impingement (mild). Tests: sport-specific programming, advanced exercise selection, rotational emphasis, performance goals, mild injury modification.",
+  "quiz_profile": {
+    "demographics": {
+      "name": "Marcus",
+      "age": 28,
+      "biological_sex": "male",
+      "height_cm": 183,
+      "weight_kg": 86,
+      "location": "Stockholm, Sweden"
+    },
+    "goals": {
+      "primary_goal": "sport_specific_performance",
+      "one_thing_to_change": "I want to be stronger in the clinch and stop getting shoulder injuries from training",
+      "urgency": "top_priority",
+      "tried_before": true,
+      "tried_before_detail": "I follow a bodybuilding split but it doesn't help my BJJ and my shoulders keep getting beat up",
+      "sport_specific": {
+        "sport": "Brazilian Jiu-Jitsu",
+        "competitive_level": "competitive",
+        "physical_demands": ["grip_strength", "rotational_power", "endurance", "neck_strength"],
+        "training_support_goal": "both_performance_and_injury_prevention"
+      },
+      "timeline": "competition_in_10_weeks"
+    },
+    "training_history": {
+      "experience_level": "advanced",
+      "current_frequency": 5,
+      "current_program": "self_programmed",
+      "current_training_detail": "PPL split 4x/week plus BJJ 4-5x/week",
+      "whats_working": "My deadlift and rows are strong",
+      "whats_not_working": "Too much bench press, shoulders are always sore, zero rotational work",
+      "estimated_maxes": {
+        "deadlift_kg": 180,
+        "bench_kg": 110,
+        "squat_kg": 140,
+        "pull_ups": 18
+      },
+      "session_duration_preference_minutes": 60,
+      "sessions_per_week_commitment": 4
+    },
+    "equipment": {
+      "training_location": "commercial_gym",
+      "gym_type": "big_box",
+      "available_equipment": ["barbell", "dumbbells", "kettlebells", "pull_up_bar", "bench", "squat_rack", "cables", "resistance_bands", "foam_roller", "medicine_ball"],
+      "space_limitation": null
+    },
+    "injuries": [
+      {
+        "area": "shoulder",
+        "side": "right",
+        "type": "chronic_pain",
+        "specific_type": "impingement",
+        "severity": 3,
+        "surgery": false,
+        "movements_that_aggravate": ["dips", "wide grip bench", "behind the neck press"],
+        "working_with_physio": false,
+        "movements_told_to_avoid": []
+      }
+    ],
+    "sport_activity": [
+      {
+        "sport": "Brazilian Jiu-Jitsu",
+        "sessions_per_week": 5,
+        "competitive_level": "competitive",
+        "demands": ["grip_strength", "rotational_power", "endurance", "neck_conditioning"]
+      }
+    ],
+    "lifestyle": {
+      "work_type": "remote",
+      "sitting_hours_per_day": 6,
+      "stress_level": "moderate",
+      "recovery_tools": ["sauna", "foam_rolling", "cold_plunge"],
+      "preferred_training_time": "morning"
+    },
+    "sleep": {
+      "hours": 7.5,
+      "quality": "good",
+      "wake_during_night": false,
+      "sleep_aids": ["magnesium"]
+    },
+    "nutrition": {
+      "diet_structure": "track_macros",
+      "dietary_restrictions": [],
+      "meals_per_day": 4,
+      "current_supplements": ["protein_powder", "creatine", "omega_3", "vitamin_d", "magnesium"],
+      "nutrition_importance": "very_important"
+    },
+    "movement_screening": {
+      "toe_touch": "easily",
+      "deep_squat_hold": "easily",
+      "arms_overhead": "with_some_arch",
+      "single_leg_balance": "easily",
+      "tight_areas": ["shoulders", "hip_flexors"]
+    },
+    "pain_mapping": {
+      "regular_aches": true,
+      "areas": [
+        {
+          "location": "right_shoulder",
+          "when": "during_exercise",
+          "severity": 3,
+          "improves_with_movement": true
+        },
+        {
+          "location": "neck",
+          "when": "after_exercise",
+          "severity": 2,
+          "improves_with_movement": true
+        }
+      ]
+    },
+    "training_personality": {
+      "variety_preference": "mix_of_both",
+      "training_partner": "alone",
+      "motivation_type": "competition",
+      "quit_triggers": ["program_not_right_for_me"],
+      "data_tracking_preference": "love_all_metrics"
+    },
+    "wearables": {
+      "devices": ["whoop"],
+      "sync_interest": true,
+      "blood_work_recent": true,
+      "blood_work_tracking_interest": true
+    },
+    "budget": {
+      "current_fitness_spend": "100_200",
+      "willingness_to_invest": "50_100"
+    },
+    "hormonal": {
+      "energy_crashes": "rarely",
+      "testosterone_changes": "no",
+      "metabolic_conditions": [],
+      "medications": []
+    },
+    "aesthetic_vs_performance": {
+      "slider": 85,
+      "aesthetic_priority_areas": null,
+      "performance_goals": "Stronger clinch, more rotational power, injury-proof shoulders, grip endurance for 6-min rounds"
+    },
+    "accountability": {
+      "level_needed": "self_motivated",
+      "stuck_with_program_12_weeks": true,
+      "what_would_help_stick": "seeing_numbers_go_up"
+    }
+  },
+  "expected_plan_properties": {
+    "sport_specific_emphasis": "BJJ",
+    "rotational_work_prioritized": true,
+    "grip_training_included": true,
+    "shoulder_impingement_protocol": true,
+    "no_dips": true,
+    "no_wide_grip_bench": true,
+    "no_behind_neck_press": true,
+    "band_pull_aparts_every_session": true,
+    "external_rotation_warmup": true,
+    "neck_conditioning_included": true,
+    "phase_3_timing": "peaks_near_competition",
+    "considers_bjj_training_load": true,
+    "max_session_duration_minutes": 60,
+    "sessions_per_week": 4,
+    "pull_push_ratio_minimum": "3:2",
+    "explosive_power_phase_3": true
+  }
+}

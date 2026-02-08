@@ -1,0 +1,137 @@
+{
+  "persona_id": "test-001",
+  "persona_name": "Sarah — Beginner with Knee Injury, Home Gym",
+  "description": "42-year-old desk worker, beginner, ACL surgery 8 months ago, home gym with dumbbells and bands only. Tests: injury protocols, beginner adjustments, minimal equipment, desk worker posture corrections.",
+  "quiz_profile": {
+    "demographics": {
+      "name": "Sarah",
+      "age": 42,
+      "biological_sex": "female",
+      "height_cm": 165,
+      "weight_kg": 72,
+      "location": "Berlin, Germany"
+    },
+    "goals": {
+      "primary_goal": "fat_loss",
+      "one_thing_to_change": "I want to lose the weight I gained after my knee surgery and feel strong again",
+      "urgency": "very_important",
+      "tried_before": true,
+      "tried_before_detail": "I did some YouTube workouts but my knee always hurt so I stopped",
+      "timeline": "no_deadline"
+    },
+    "training_history": {
+      "experience_level": "beginner",
+      "current_frequency": 0,
+      "current_program": "none",
+      "session_duration_preference_minutes": 45,
+      "sessions_per_week_commitment": 3
+    },
+    "equipment": {
+      "training_location": "home_gym",
+      "available_equipment": ["dumbbells", "resistance_bands", "foam_roller"],
+      "space_limitation": "Small apartment living room, neighbours below"
+    },
+    "injuries": [
+      {
+        "area": "knee",
+        "side": "left",
+        "type": "post_surgery",
+        "specific_type": "ACL reconstruction",
+        "severity": 4,
+        "surgery": true,
+        "surgery_date": "2025-06-15",
+        "movements_that_aggravate": ["deep squats", "jumping", "quick direction changes"],
+        "working_with_physio": true,
+        "movements_told_to_avoid": ["plyometrics", "heavy loaded knee flexion beyond 90 degrees"]
+      }
+    ],
+    "sport_activity": [],
+    "lifestyle": {
+      "work_type": "desk_job",
+      "sitting_hours_per_day": 9,
+      "stress_level": "high",
+      "recovery_tools": ["foam_roller"],
+      "preferred_training_time": "evening"
+    },
+    "sleep": {
+      "hours": 6,
+      "quality": "poor",
+      "wake_during_night": true,
+      "sleep_aids": ["melatonin"]
+    },
+    "nutrition": {
+      "diet_structure": "trying_healthy_inconsistent",
+      "dietary_restrictions": ["gluten_free"],
+      "meals_per_day": 3,
+      "current_supplements": ["multivitamin"],
+      "nutrition_importance": "somewhat_important"
+    },
+    "movement_screening": {
+      "toe_touch": "not_close",
+      "deep_squat_hold": "cant_get_there",
+      "arms_overhead": "with_some_arch",
+      "single_leg_balance": "wobble_a_lot",
+      "tight_areas": ["hip_flexors", "hamstrings", "lower_back"]
+    },
+    "pain_mapping": {
+      "regular_aches": true,
+      "areas": [
+        {
+          "location": "lower_back",
+          "when": "when_sitting",
+          "severity": 3,
+          "improves_with_movement": true
+        }
+      ]
+    },
+    "training_personality": {
+      "variety_preference": "prefer_routine",
+      "training_partner": "alone",
+      "motivation_type": "feeling_better",
+      "quit_triggers": ["injury", "no_results", "too_complex"],
+      "data_tracking_preference": "just_tell_me_what_to_do"
+    },
+    "wearables": {
+      "devices": [],
+      "sync_interest": false,
+      "blood_work_recent": false
+    },
+    "budget": {
+      "current_fitness_spend": "under_50",
+      "willingness_to_invest": "20_50"
+    },
+    "hormonal": {
+      "energy_crashes": "frequently",
+      "menstrual_regular": true,
+      "menstrual_affects_training": true,
+      "metabolic_conditions": [],
+      "medications": []
+    },
+    "aesthetic_vs_performance": {
+      "slider": 60,
+      "aesthetic_priority_areas": ["midsection", "arms"],
+      "performance_goals": null
+    },
+    "accountability": {
+      "level_needed": "regular_check_ins",
+      "stuck_with_program_12_weeks": false,
+      "what_would_help_stick": "seeing_results_fast"
+    }
+  },
+  "expected_plan_properties": {
+    "phase_1_extended": true,
+    "injury_protocol_applied": "ACL Post-Surgery",
+    "no_plyometrics": true,
+    "no_deep_squats": true,
+    "knee_flexion_limited_to_90": true,
+    "nordic_curls_eccentric_band_assist": true,
+    "desk_worker_warmup_additions": true,
+    "equipment_limited_to": ["bodyweight", "dumbbells", "bands", "foam_roller"],
+    "hamstring_mobility_warmup": true,
+    "single_leg_balance_warmup": true,
+    "max_session_duration_minutes": 45,
+    "sessions_per_week": 3,
+    "beginner_exercise_limit": "4-5 per session",
+    "max_rpe_phase_1": 7
+  }
+}

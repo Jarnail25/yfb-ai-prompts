@@ -1,0 +1,160 @@
+{
+  "persona_id": "test-003",
+  "persona_name": "Hans — Senior with Multiple Injuries, Minimal Equipment",
+  "description": "61-year-old retiree, former active but deconditioned, lower back disc issue + knee osteoarthritis, home gym with kettlebells and bands only. Tests: 55+ adjustments, multiple injury protocols, conservative programming, longevity goal, minimal equipment.",
+  "quiz_profile": {
+    "demographics": {
+      "name": "Hans",
+      "age": 61,
+      "biological_sex": "male",
+      "height_cm": 178,
+      "weight_kg": 88,
+      "location": "Copenhagen, Denmark"
+    },
+    "goals": {
+      "primary_goal": "longevity_health",
+      "one_thing_to_change": "I want to move without pain and stay independent as I age",
+      "urgency": "moderate",
+      "tried_before": true,
+      "tried_before_detail": "Used to run and cycle in my 40s but back pain made me stop everything 5 years ago",
+      "timeline": "no_deadline"
+    },
+    "training_history": {
+      "experience_level": "used_to_train_stopped",
+      "current_frequency": 0,
+      "current_program": "none",
+      "session_duration_preference_minutes": 45,
+      "sessions_per_week_commitment": 3
+    },
+    "equipment": {
+      "training_location": "home_gym",
+      "available_equipment": ["kettlebells", "resistance_bands", "foam_roller"],
+      "space_limitation": "Garage, good space but cold in winter"
+    },
+    "injuries": [
+      {
+        "area": "lower_back",
+        "side": "bilateral",
+        "type": "chronic_pain",
+        "specific_type": "disc_bulge_L4_L5",
+        "severity": 5,
+        "surgery": false,
+        "movements_that_aggravate": ["bending forward to pick things up", "sit-ups", "sitting for long periods"],
+        "working_with_physio": true,
+        "movements_told_to_avoid": ["loaded spinal flexion", "heavy deadlifts from floor"]
+      },
+      {
+        "area": "knee",
+        "side": "right",
+        "type": "chronic_pain",
+        "specific_type": "osteoarthritis",
+        "severity": 4,
+        "surgery": false,
+        "movements_that_aggravate": ["stairs", "deep squats", "kneeling"],
+        "working_with_physio": true,
+        "movements_told_to_avoid": ["deep loaded knee flexion"]
+      }
+    ],
+    "sport_activity": [],
+    "lifestyle": {
+      "work_type": "retired",
+      "sitting_hours_per_day": 5,
+      "stress_level": "low",
+      "recovery_tools": ["foam_rolling", "stretching_routine"],
+      "preferred_training_time": "morning"
+    },
+    "sleep": {
+      "hours": 7,
+      "quality": "okay",
+      "wake_during_night": true,
+      "sleep_aids": []
+    },
+    "nutrition": {
+      "diet_structure": "trying_healthy_inconsistent",
+      "dietary_restrictions": [],
+      "meals_per_day": 3,
+      "current_supplements": ["multivitamin", "omega_3", "vitamin_d"],
+      "nutrition_importance": "somewhat_important"
+    },
+    "movement_screening": {
+      "toe_touch": "not_close",
+      "deep_squat_hold": "cant_get_there",
+      "arms_overhead": "easily",
+      "single_leg_balance": "cant_do_it",
+      "tight_areas": ["hamstrings", "hip_flexors", "lower_back", "calves"]
+    },
+    "pain_mapping": {
+      "regular_aches": true,
+      "areas": [
+        {
+          "location": "lower_back",
+          "when": "when_sitting",
+          "severity": 5,
+          "improves_with_movement": true
+        },
+        {
+          "location": "right_knee",
+          "when": "during_exercise",
+          "severity": 4,
+          "improves_with_movement": "sometimes"
+        }
+      ]
+    },
+    "training_personality": {
+      "variety_preference": "prefer_routine",
+      "training_partner": "alone",
+      "motivation_type": "feeling_better",
+      "quit_triggers": ["injury", "too_complex"],
+      "data_tracking_preference": "just_tell_me_what_to_do"
+    },
+    "wearables": {
+      "devices": [],
+      "sync_interest": false,
+      "blood_work_recent": true,
+      "blood_work_tracking_interest": true
+    },
+    "budget": {
+      "current_fitness_spend": "nothing",
+      "willingness_to_invest": "under_20"
+    },
+    "hormonal": {
+      "energy_crashes": "sometimes",
+      "testosterone_changes": "somewhat",
+      "body_comp_changes_despite_effort": true,
+      "metabolic_conditions": [],
+      "medications": ["blood_pressure_medication"]
+    },
+    "aesthetic_vs_performance": {
+      "slider": 30,
+      "aesthetic_priority_areas": null,
+      "performance_goals": "Walk without pain, carry groceries, play with grandchildren"
+    },
+    "accountability": {
+      "level_needed": "occasional_check_ins",
+      "stuck_with_program_12_weeks": false,
+      "what_would_help_stick": "feeling_better"
+    }
+  },
+  "expected_plan_properties": {
+    "age_55_plus_adjustments": true,
+    "multiple_injury_protocol": true,
+    "disc_protocol_applied": true,
+    "knee_osteoarthritis_protocol": true,
+    "no_loaded_spinal_flexion": true,
+    "no_heavy_deadlifts_from_floor": true,
+    "no_deep_loaded_knee_flexion": true,
+    "no_explosive_plyometrics": true,
+    "phase_1_extended_extra_weeks": true,
+    "max_rpe": 8,
+    "balance_work_every_warmup": true,
+    "neutral_spine_cue_every_exercise": true,
+    "mcgill_big_3_in_phase_1": true,
+    "hip_flexor_mobility_every_warmup": true,
+    "hamstring_mobility_every_warmup": true,
+    "medical_consultation_note": true,
+    "equipment_limited_to": ["bodyweight", "kettlebells", "bands", "foam_roller"],
+    "max_session_duration_minutes": 45,
+    "sessions_per_week": 3,
+    "exercise_count_reduced": true
+  }
+}
