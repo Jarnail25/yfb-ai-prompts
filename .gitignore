@@ -1,0 +1,17 @@
+# Environment
+.env
+.env.local
+
+# Node (for test scripts)
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Never commit real user data
+*.real-data.*
