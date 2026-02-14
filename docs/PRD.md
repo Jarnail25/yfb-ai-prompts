@@ -3,7 +3,7 @@
 
 **AI-Powered Personalized Fitness Platform**
 
-Version 2.0 (Combined) | February 2026 | Confidential
+Version 2.1 (Combined) | February 2026 | Confidential
 
 Quiz Funnel | AI Plan Generation | Workout Tracking | AI Coaching
 Wearable Integration | Blood Panel Analytics | Supplement Marketplace | Nutrition Planning
@@ -361,7 +361,9 @@ AI generates weekly meal plans based on:
 
 12. TECHNICAL ARCHITECTURE (UPDATED FOR MULTI-AGENT)
 12.1 Stack Overview
-The technology stack remains the same as v1.0: Supabase (database, auth, storage, edge functions), Claude API (AI plan generation, coaching, analysis), Stripe (payments), React/Next.js (frontend), deployed on Vercel. The key change in v2.0 is how these components are organized across repositories and how Claude Code agents interact with them.
+The technology stack remains the same as v1.0: Supabase (database, auth, storage, edge functions), Claude API (AI plan generation, coaching, analysis), Stripe (payments), React/Next.js (frontend), deployed on Vercel. The key change in v2.1 is how these components are organized across repositories, how Claude Code agents interact with them, and the guardrail infrastructure that keeps agents in scope.
+
+See `docs/ARCHITECTURE.md` in each repo for WHY each architectural decision was made (multi-repo rationale, Vercel choice, Supabase choice, Claude API model selection, PWA/offline strategy).
 12.2 Three-Repository Architecture
 The project is split into three independent Git repositories, each owned by a specific set of Claude Code agents. This separation enforces clean boundaries and enables parallel development without merge conflicts.
 
@@ -381,6 +383,13 @@ Critical rule: The frontend NEVER calls the Claude API directly. All AI interact
 12A. MULTI-AGENT ORCHESTRATION ARCHITECTURE
 12A.1 Why Multi-Agent
 A project of this complexity exceeds what a single Claude Code session can hold in context. The multi-agent approach solves this by giving each agent a focused scope, its own CLAUDE.md instruction file, and strict file ownership boundaries. This prevents context overflow, naming drift, and cross-cutting bugs.
+
+v2.1 adds concrete guardrail infrastructure to enforce these boundaries:
+- `feature-tracker.json` in each repo: Token-efficient status tracker (~200 tokens vs 2,000+ prose). Agents read at session start for current project state, update at session end.
+- `.claude/hooks.json` in each repo: Exit Code 2 hooks block cross-repo file edits, TypeScript `any` type usage, and `.env` access at the tool level — before code even reaches CI.
+- `.claude/settings.json` in each repo: MCP CLI mode configuration saves context window budget by connecting to Supabase, GitHub, and Vercel directly.
+- `.github/workflows/ci.yml` in frontend + backend repos: Automated lint, type-check, build, and test on every PR.
+- `tsconfig.json` with all strict mode flags: NON-NEGOTIABLE for AI-assisted development — catches type errors that agents create.
 12A.2 Agent Roles
 Six specialized agent roles operate across the three repositories. Each role is activated at the start of a Claude Code session with a role declaration prompt. Agents MUST NOT modify files outside their ownership scope.
 
@@ -398,7 +407,7 @@ Full-Stack Agent (if needed): Integration testing across all layers. Fix contrac
 12A.4 CLAUDE.md Files
 Each repository contains a CLAUDE.md file that Claude Code reads at session start. This is the most important file in each repo. It defines: project overview, tech stack, coding rules, file ownership scope, what the agent can and cannot modify, naming conventions, and integration points with other repos.
 
-The CLAUDE.md files are the source of truth for agent behavior. They are maintained by the DevOps Agent and updated when architectural decisions change. Full specifications are provided in the Technical Implementation Guide v2.0.
+The CLAUDE.md files are the source of truth for agent behavior. They reference `feature-tracker.json` for current project state and `docs/ARCHITECTURE.md` for architectural rationale. They are maintained by the DevOps Agent and updated when architectural decisions change. Full specifications are provided in the Technical Implementation Guide v2.1.
 
 
 12B. AGENT COMMUNICATION PROTOCOL
@@ -413,13 +422,14 @@ When a type changes, the change propagates: types/ updated first, then Zod schem
 12B.3 Handoff Protocol
 Every Claude Code session ends with a structured handoff that enables the next session to pick up without context loss:
 
+Update feature-tracker.json: Mark features as complete, update blockers, add new contracts.
 Session Summary: What was built, files modified, tests added.
 Interface Contracts: API endpoints created, component props, database schema changes.
 Known Issues: Bugs, workarounds, technical debt.
 Next Session Tasks: Prioritized list with recommended agent role.
 Dependencies/Blockers: What's waiting on other work.
 
-Session summaries are stored in a SESSION_LOGS.md file in each repository root and referenced when starting new sessions.
+Session summaries are stored in a SESSION_LOGS.md file in each repository root and referenced when starting new sessions. The feature-tracker.json provides a token-efficient snapshot of the entire project state without reading prose logs.
 12B.4 Prompt Versioning and Backend Sync
 AI prompts in yfb-ai-prompts are versioned independently. When a prompt changes, the AI Agent updates changelog.md with the date, what changed, and test results. The Backend Agent then updates the Edge Function to reference the new prompt version. Prompts are bundled into Edge Functions at deploy time (not fetched at runtime) to ensure consistency and avoid latency.
 

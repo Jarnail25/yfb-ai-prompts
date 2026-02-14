@@ -1,0 +1,90 @@
+{
+  "persona_id": "martial-artist-shoulder",
+  "name": "Kai Nakamura",
+  "age": 26,
+  "gender": "male",
+  "occupation": "Bartender, on feet 8+ hours/shift",
+  "training_experience": "intermediate",
+  "training_history": "Brazilian Jiu-Jitsu 4x/week for 3 years. Some kettlebell work. Dislocated shoulder 8 weeks ago during rolling. Physio cleared for progressive strengthening, no contact for 4 more weeks.",
+  "goals": {
+    "primary": "injury_recovery",
+    "secondary": "sport_performance",
+    "tertiary": "strength"
+  },
+  "injuries": [
+    {
+      "location": "right_shoulder",
+      "type": "anterior_dislocation_recovery",
+      "severity": "moderate",
+      "diagnosed": true,
+      "notes": "Anterior dislocation 8 weeks ago. MRI showed no structural tear. Physio rehab ongoing. Cleared for progressive loading within pain-free ROM. No overhead pressing beyond 90° or end-range external rotation under load yet."
+    }
+  ],
+  "equipment": {
+    "location": "commercial_gym",
+    "available": ["barbell", "dumbbells", "cables", "bands", "bench", "pull_up_bar", "kettlebells", "leg_press", "landmine"],
+    "not_available": []
+  },
+  "schedule": {
+    "days_per_week": 4,
+    "preferred_days": ["monday", "tuesday", "thursday", "saturday"],
+    "session_duration_minutes": 60,
+    "time_of_day": "morning"
+  },
+  "body_composition": {
+    "height_cm": 175,
+    "weight_kg": 78,
+    "body_fat_percent": 14,
+    "goal_weight_kg": 78
+  },
+  "lifestyle": {
+    "sleep_hours": 7,
+    "stress_level": "moderate",
+    "sitting_hours_per_day": 2,
+    "steps_per_day": 14000
+  },
+  "quiz_dimensions": {
+    "niche": "sport_specific_martial_arts",
+    "experience_level": "intermediate",
+    "injury_flag": true,
+    "equipment_tier": "full_gym",
+    "time_commitment": "high"
+  },
+  "expected_plan_features": {
+    "must_include": [
+      "shoulder stability and rotator cuff strengthening progression",
+      "scapular control exercises (wall slides, band pull-aparts, serratus work)",
+      "grip strength work (BJJ-specific)",
+      "posterior chain for takedown defense and guard work",
+      "neck strengthening (combat sport requirement)",
+      "hip mobility for guard play",
+      "isometric shoulder holds at progressively challenging angles",
+      "landmine pressing as shoulder-friendly pressing alternative"
+    ],
+    "must_exclude": [
+      "overhead barbell pressing (shoulder ROM restriction)",
+      "dips with full depth (anterior shoulder stress)",
+      "pull-ups with kipping or dynamic loading",
+      "bench press at full ROM (limit to pain-free range initially)",
+      "any exercise requiring end-range external rotation under load in Phase 1"
+    ],
+    "must_progress": [
+      "shoulder ROM gradually increases across phases",
+      "pressing movements progress from landmine → incline DB → overhead (if cleared)",
+      "pulling movements progress from band → cable → bodyweight",
+      "sport-specific movements increase as shoulder tolerance improves"
+    ]
+  },
+  "expected_coach_interactions": [
+    {
+      "scenario": "wants_to_return_to_rolling",
+      "user_message": "I'm feeling good, can I start rolling again? My physio said 4 more weeks but I feel ready.",
+      "expected_behavior": "Coach should NOT override medical advice. Firmly but kindly reinforce that physio clearance is non-negotiable for contact sports after dislocation. Offer sport-specific conditioning alternatives to scratch the itch (drilling solo, positional work without resistance)."
+    },
+    {
+      "scenario": "pain_during_exercise",
+      "user_message": "I felt a sharp pain during the cable face pull. Not like muscle soreness, more like a stab.",
+      "expected_behavior": "Coach should immediately advise stopping the exercise. Sharp pain ≠ training soreness. Recommend contacting physio before next session. Do NOT suggest modifications mid-pain — defer to professional assessment."
+    }
+  ]
+}

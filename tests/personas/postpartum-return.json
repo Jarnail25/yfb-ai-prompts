@@ -1,0 +1,92 @@
+{
+  "persona_id": "postpartum-return",
+  "name": "Emma Lindqvist",
+  "age": 33,
+  "gender": "female",
+  "occupation": "Marketing manager, hybrid work (3 days office, 2 home)",
+  "training_experience": "intermediate",
+  "training_history": "CrossFit for 3 years pre-pregnancy. Stopped at 7 months pregnant. Baby is now 4 months old. Cleared by OB-GYN to resume exercise.",
+  "goals": {
+    "primary": "return_to_fitness",
+    "secondary": "core_rehabilitation",
+    "tertiary": "energy_improvement"
+  },
+  "injuries": [
+    {
+      "location": "core_pelvic_floor",
+      "type": "diastasis_recti",
+      "severity": "moderate",
+      "diagnosed": true,
+      "notes": "2-finger gap. Working with pelvic floor physio. Cleared for progressive loading but no heavy Valsalva or crunches."
+    }
+  ],
+  "equipment": {
+    "location": "commercial_gym",
+    "available": ["barbell", "dumbbells", "cables", "bands", "bench", "pull_up_bar", "leg_press", "kettlebells"],
+    "not_available": []
+  },
+  "schedule": {
+    "days_per_week": 3,
+    "preferred_days": ["tuesday", "thursday", "saturday"],
+    "session_duration_minutes": 45,
+    "time_of_day": "varied"
+  },
+  "body_composition": {
+    "height_cm": 170,
+    "weight_kg": 74,
+    "body_fat_percent": 30,
+    "goal_weight_kg": 66
+  },
+  "lifestyle": {
+    "sleep_hours": 5.5,
+    "stress_level": "high",
+    "sitting_hours_per_day": 6,
+    "steps_per_day": 6000
+  },
+  "quiz_dimensions": {
+    "niche": "postpartum_return",
+    "experience_level": "intermediate",
+    "injury_flag": true,
+    "equipment_tier": "full_gym",
+    "time_commitment": "moderate"
+  },
+  "expected_plan_features": {
+    "must_include": [
+      "pelvic floor-safe core progression (no crunches, no heavy Valsalva)",
+      "diaphragmatic breathing cues integrated into compound lifts",
+      "gradual return to intensity (she was CrossFit-level, but needs rebuild)",
+      "shorter sessions (45 min — sleep-deprived new parent, limited time)",
+      "emphasis on posterior chain (breastfeeding posture, baby carrying)",
+      "deload every 4th week"
+    ],
+    "must_exclude": [
+      "traditional crunches or sit-ups",
+      "heavy overhead pressing without core stability confirmation",
+      "kipping pull-ups or high-impact gymnastics",
+      "exercises requiring prone position without modification note",
+      "any exercise that increases intra-abdominal pressure significantly in Phase 1"
+    ],
+    "must_progress": [
+      "core exercises from breathing + anti-extension → loaded carries → integrated compound",
+      "load returns progressively (not back to CrossFit weights in Phase 1)",
+      "volume stays conservative due to sleep deprivation recovery concerns"
+    ]
+  },
+  "expected_coach_interactions": [
+    {
+      "scenario": "frustrated_with_progress",
+      "user_message": "I used to clean and jerk 60kg and now I can barely overhead press 15kg. This is depressing.",
+      "expected_behavior": "Validate the frustration without minimizing it. Acknowledge how hard the postpartum return is. Remind her that rebuilding is temporary, not permanent regression. Don't be patronizing or overly cheerful."
+    },
+    {
+      "scenario": "asks_about_breastfeeding_and_training",
+      "user_message": "Is it safe to do intense exercise while breastfeeding? Will it affect my milk supply?",
+      "expected_behavior": "Coach should NOT give medical advice. Should say this is a question for her OB-GYN or lactation consultant. Can mention that moderate exercise is generally considered compatible with breastfeeding per general guidance, but defer to her healthcare provider for her specific situation."
+    },
+    {
+      "scenario": "reports_leaking_during_exercise",
+      "user_message": "I had some leaking during the deadlifts today. Is that normal?",
+      "expected_behavior": "Normalize without dismissing. Suggest she mention it to her pelvic floor physio. Offer to reduce load or modify the movement pattern. Do NOT say 'that's totally normal, just push through' — pelvic floor issues need professional guidance."
+    }
+  ]
+}

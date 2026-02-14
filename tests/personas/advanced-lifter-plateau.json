@@ -1,0 +1,77 @@
+{
+  "persona_id": "advanced-lifter-plateau",
+  "name": "Marcus Johnson",
+  "age": 29,
+  "gender": "male",
+  "occupation": "Electrician, physically active job",
+  "training_experience": "advanced",
+  "training_history": "6 years consistent strength training. Ran 5/3/1 for 2 years, PPL for 1 year, currently stalled on a bro split for 6 months.",
+  "goals": {
+    "primary": "strength",
+    "secondary": "muscle_gain",
+    "tertiary": "performance"
+  },
+  "injuries": [],
+  "equipment": {
+    "location": "home_gym",
+    "available": ["barbell", "dumbbells", "pull_up_bar", "bands", "bench", "squat_rack", "dip_station"],
+    "not_available": ["cables", "machines", "leg_press"]
+  },
+  "schedule": {
+    "days_per_week": 4,
+    "preferred_days": ["monday", "tuesday", "thursday", "friday"],
+    "session_duration_minutes": 75,
+    "time_of_day": "evening"
+  },
+  "body_composition": {
+    "height_cm": 183,
+    "weight_kg": 90,
+    "body_fat_percent": 16,
+    "goal_weight_kg": 93
+  },
+  "lifestyle": {
+    "sleep_hours": 7.5,
+    "stress_level": "moderate",
+    "sitting_hours_per_day": 2,
+    "steps_per_day": 12000
+  },
+  "quiz_dimensions": {
+    "niche": "experienced_lifter_plateau",
+    "experience_level": "advanced",
+    "injury_flag": false,
+    "equipment_tier": "home_gym",
+    "time_commitment": "high"
+  },
+  "expected_plan_features": {
+    "must_include": [
+      "periodization change from his current approach (not just bro split)",
+      "rotation system (A/B/C blocks with sagittal, frontal, posterior emphasis)",
+      "progressive overload with wave loading or DUP",
+      "Nordic curl progression in every session",
+      "end-range training (PAILs/RAILs, loaded stretches)",
+      "deload every 4th week with 40-50% volume reduction"
+    ],
+    "must_exclude": [
+      "machine-dependent exercises (home gym limitation)",
+      "cable exercises (not available)",
+      "beginner-level loads or progressions"
+    ],
+    "must_progress": [
+      "isometric progression: yielding → overcoming → functional → reactive",
+      "intensity and complexity increase across 3 phases",
+      "home gym creative substitutions for cable/machine movements"
+    ]
+  },
+  "expected_coach_interactions": [
+    {
+      "scenario": "questions_programming",
+      "user_message": "Why am I doing split squats instead of back squats? I can squat 180kg.",
+      "expected_behavior": "Coach should explain the methodology (unilateral focus, rotation system benefits) without being condescending to an experienced lifter. Acknowledge his strength level."
+    },
+    {
+      "scenario": "wants_to_skip_mobility",
+      "user_message": "Can I skip the warm-up and mobility stuff? I just want to lift.",
+      "expected_behavior": "Coach should explain why it matters for his goals (breaking plateau requires movement quality, not just load) but respect his experience. Not preachy."
+    }
+  ]
+}

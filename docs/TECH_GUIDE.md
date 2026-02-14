@@ -1,7 +1,7 @@
 TECHNICAL IMPLEMENTATION GUIDE
 Your Fitness Buddy
 Claude Code Multi-Agent Development Playbook
-Version 2.0 | February 2026
+Version 2.1 | February 2026
 Multi-Agent Orchestration | Session Coordination | Agent Guidelines
 Agent Roles | Repository Structure | CLAUDE.md Specs | Session Orchestration | Task Breakdown
 1. DEVELOPMENT STRATEGY & MULTI-AGENT ARCHITECTURE
@@ -12,11 +12,12 @@ This multi-agent approach solves three critical problems: context overflow (no s
 1.3 Agent Roles
 Each Claude Code session has ONE role. You declare the role at session start, and the agent focuses exclusively on that scope. When switching roles, start a NEW session with fresh context.
 1.4 Critical Rules
-An agent MUST NOT modify files outside its ownership scope. Frontend Agent never writes SQL. Backend Agent never touches React components.
-Every session starts by reading the repo's CLAUDE.md file. This is non-negotiable.
-Every session ends with a structured handoff summary (see Section 1.5).
+An agent MUST NOT modify files outside its ownership scope. Frontend Agent never writes SQL. Backend Agent never touches React components. This is enforced by `.claude/hooks.json` (Exit Code 2 hooks block cross-repo file edits at the tool level).
+Every session starts by reading the repo's CLAUDE.md file and `feature-tracker.json`. This is non-negotiable.
+Every session ends with updating `feature-tracker.json` and appending a structured handoff summary to SESSION_LOGS.md (see Section 1.5).
 All AI API calls happen in Edge Functions (yfb-backend). The frontend NEVER calls Claude API directly.
 Shared TypeScript types live in yfb-frontend/src/types/ (canonical source). Backend uses equivalent Zod schemas. AI output schemas must match.
+TypeScript strict mode (`tsconfig.json`) is NON-NEGOTIABLE. See `docs/ARCHITECTURE.md` for architectural decisions and rationale.
 1.5 SESSION ORCHESTRATION & COORDINATION
 1.5.1 Sequential vs. Parallel Sessions
 For MVP (Phases 1–2): STRICTLY SEQUENTIAL sessions.
@@ -44,6 +45,7 @@ Commit with reference to the contract.
 1.5.4 Session Start Template
 Every new session begins with this prompt structure:
 You are the [ROLE] Agent for Your Fitness Buddy. Read CLAUDE.md.
+Read feature-tracker.json for current project state and blockers.
 Context from previous session ([DATE], [AGENT]):
 - Completed: [what was built]
 - API contracts: [endpoints created with schemas]
@@ -51,7 +53,9 @@ Context from previous session ([DATE], [AGENT]):
 - Current state: [files modified, features working]
 Task: [specific task for this session]
 1.5.5 Session End Template (Mandatory)
-Every session ends by appending to SESSION_LOGS.md in the repo root:
+Every session ends by:
+1. Updating `feature-tracker.json` with status changes, new contracts, and blockers.
+2. Appending to SESSION_LOGS.md in the repo root:
 ## Session [N]: [DATE] - [AGENT ROLE]
 Duration: [X] hours | Commits: [hashes] | Branch: [name]
 ### Completed
@@ -88,11 +92,18 @@ Three separate repositories, each with its own CLAUDE.md file. The directory str
 yfb-frontend/
 ├── CLAUDE.md
 ├── SESSION_LOGS.md
+├── feature-tracker.json          # Token-efficient project status (~200 tokens vs 2,000+ prose)
+├── .claude/
+│   ├── hooks.json                # Exit Code 2 guardrails (blocks cross-repo edits, any type, .env)
+│   └── settings.json             # MCP CLI mode config (Supabase, GitHub, Vercel)
 ├── package.json
 ├── next.config.js
 ├── tailwind.config.ts
-├── tsconfig.json
+├── tsconfig.json                 # Strict mode — NON-NEGOTIABLE for AI-assisted dev
 ├── .env.local / .env.example
+├── .github/
+│   └── workflows/
+│       └── ci.yml                # Lint + type-check + build + test on every PR
 ├── public/
 │   ├── manifest.json, sw.js, icons/
 │   └── locales/ (en.json, de.json, sv.json, da.json, no.json)
@@ -107,10 +118,22 @@ yfb-frontend/
 │   ├── hooks/, lib/ (supabase/, stripe/, i18n/, utils.ts)
 │   ├── stores/ (Zustand), types/, styles/
 └── tests/ (Playwright E2E + component)
+└── docs/
+    ├── PRD.md
+    ├── TECH_GUIDE.md
+    ├── AGENT_GUIDELINES.md
+    └── ARCHITECTURE.md               # Architectural decisions + rationale
 2.2 yfb-backend (Supabase + Edge Functions)
 yfb-backend/
 ├── CLAUDE.md
 ├── SESSION_LOGS.md
+├── feature-tracker.json              # Token-efficient project status
+├── .claude/
+│   ├── hooks.json                    # Exit Code 2 guardrails (blocks frontend/prompt edits, .env, test files)
+│   └── settings.json                 # MCP CLI mode config (Supabase, GitHub)
+├── .github/
+│   └── workflows/
+│       └── ci.yml                    # Deno type-check + migration validation on every PR
 ├── supabase/
 │   ├── config.toml
 │   ├── migrations/ (001_initial_schema.sql through 009+)
@@ -118,19 +141,41 @@ yfb-backend/
 │       analyze-blood-panel, renpho-sync, stripe-webhook, stripe-checkout, quiz-resume)
 ├── scripts/ (seed-exercise-bank.ts, seed-quiz-questions.ts, export-anonymized.ts)
 ├── data/ (exercise-bank.json, quiz-questions.json, niche-messaging.json)
-└── tests/
+├── tests/
+└── docs/
+    ├── PRD.md
+    ├── TECH_GUIDE.md
+    ├── AGENT_GUIDELINES.md
+    └── ARCHITECTURE.md               # Architectural decisions + rationale
 2.3 yfb-ai-prompts (AI System Prompts & Templates)
 yfb-ai-prompts/
 ├── CLAUDE.md
 ├── SESSION_LOGS.md
+├── feature-tracker.json              # Token-efficient project status
+├── changelog.md
+├── .claude/
+│   ├── hooks.json                    # Exit Code 2 guardrails (blocks application code edits)
+│   └── settings.json                 # MCP CLI mode config (GitHub)
 ├── prompts/
 │   ├── plan-generation/ (system-prompt.md, methodology.md, exercise-selection.md,
 │   │   injury-protocols.md, output-schema.json, examples/*.json)
 │   ├── coach-chat/ (system-prompt.md, personality.md, boundaries.md, check-in-templates/)
 │   ├── supplement-analysis/ (system-prompt.md, marker-reference.md)
 │   └── nutrition/ (system-prompt.md, meal-plan-rules.md)
-├── tests/ (personas/*.json, plan-validation.ts, coach-behavior.ts)
-└── changelog.md
+├── tests/
+│   ├── personas/                     # 5 starter personas (expand to 20+ through sprints)
+│   │   ├── desk-worker-knee-pain.json
+│   │   ├── advanced-lifter-plateau.json
+│   │   ├── senior-beginner.json
+│   │   ├── postpartum-return.json
+│   │   └── martial-artist-shoulder.json
+│   ├── plan-validation.ts
+│   └── coach-behavior.ts
+└── docs/
+    ├── PRD.md
+    ├── TECH_GUIDE.md
+    ├── AGENT_GUIDELINES.md
+    └── ARCHITECTURE.md               # Architectural decisions + rationale
 3. CLAUDE.md SPECIFICATIONS (PER REPO)
 Each repository has a CLAUDE.md file that Claude Code reads at session start. These are the complete, copy-paste-ready specifications.
 3.1 yfb-frontend/CLAUDE.md
@@ -169,9 +214,11 @@ NEVER TOUCHES: Any file outside yfb-frontend/
 ## Session Protocol
 1. Read this CLAUDE.md first, every session.
 2. Check SESSION_LOGS.md for context from previous sessions.
-3. Work within your file ownership scope.
-4. End every session by appending to SESSION_LOGS.md.
-5. Document any API contracts consumed in your handoff notes.
+3. Read feature-tracker.json for current project state and blockers.
+4. Work within your file ownership scope.
+5. End every session by updating feature-tracker.json with your changes.
+6. Append session summary to SESSION_LOGS.md.
+7. Document any API contracts consumed in your handoff notes.
 3.2 yfb-backend/CLAUDE.md
 # Your Fitness Buddy — Backend
 ## Project Overview
@@ -331,15 +378,21 @@ Unchanged from TechGuide v1.0. Plan generation uses multi-document composition (
 8. CODING CONVENTIONS & STANDARDS
 Unchanged from TechGuide v1.0. See individual CLAUDE.md files (Section 3) for repo-specific conventions.
 9. PROJECT SETUP GUIDE (DAY 1)
-Updated to reflect three-repo structure:
-Create three GitHub repos: yfb-frontend, yfb-backend, yfb-ai-prompts. Initialize each with CLAUDE.md (from Section 3) and empty SESSION_LOGS.md.
+Updated to reflect three-repo structure with v2.1 agent infrastructure:
+Create three GitHub repos: yfb-frontend, yfb-backend, yfb-ai-prompts. Initialize each with:
+  - CLAUDE.md (from Section 3)
+  - SESSION_LOGS.md (empty template)
+  - feature-tracker.json (sprint-mapped status tracker — agents read at session start, update at session end)
+  - .claude/hooks.json (Exit Code 2 guardrails — block cross-repo file edits at the tool level)
+  - .claude/settings.json (MCP CLI mode configuration — saves context window budget)
+  - docs/ARCHITECTURE.md (architectural decisions + rationale — shared across all 3 repos)
 Set up Supabase project (supabase.com). Install CLI. Link project.
-Set up Next.js project (create-next-app with TypeScript, Tailwind, App Router). Install all dependencies per CLAUDE.md.
+Set up Next.js project (create-next-app with TypeScript, Tailwind, App Router). Install all dependencies per CLAUDE.md. Verify tsconfig.json has ALL strict mode flags enabled (NON-NEGOTIABLE for AI-assisted development).
 Set up Stripe (create products: Free, Pro $19.99/mo, Business $49.99/mo). Configure webhook to yfb-backend.
 Set up Anthropic API key in Supabase Edge Function secrets.
 Backend Agent: Write initial migrations (001_initial_schema.sql through 006_rls_policies.sql). Apply with supabase db push.
 Connect yfb-frontend to Vercel. Set environment variables. Verify deployment.
-DevOps Agent: Set up GitHub Actions CI for all three repos (lint, type-check, test on PR).
+Add .github/workflows/ci.yml to yfb-frontend (lint + type-check + build + test on PR) and yfb-backend (Deno type-check + migration validation on PR). Verify CI passes on initial commit.
 10. MVP TASK BREAKDOWN (UPDATED WITH SESSION STRATEGY)
 Each sprint task now includes the recommended agent and session strategy.
 Sprint 1 (Week 1-2): Foundation
@@ -355,11 +408,11 @@ Total: ~310 hours + 20% buffer = ~370 hours across 12 weeks.
 11. TESTING & QA PROTOCOL
 Unchanged from TechGuide v1.0. AI plan validation with 20+ persona test suite. Quiz logic automated tests. Playwright E2E for critical flows. axe-core accessibility scans in CI.
 12. DEPLOYMENT PIPELINE
-Updated for multi-repo:
-yfb-frontend: Auto-deploy to Vercel from main branch on every push.
-yfb-backend: Manual deploy via supabase db push (migrations) and supabase functions deploy (Edge Functions). Never auto-deploy backend.
-yfb-ai-prompts: No direct deployment. Prompts are bundled into Edge Functions at backend deploy time.
-CI/CD: GitHub Actions on all three repos. On PR: lint, type-check, test. On merge to main: deploy (frontend only auto, backend manual).
+Updated for multi-repo with automated CI:
+yfb-frontend: Auto-deploy to Vercel from main branch on every push. CI via `.github/workflows/ci.yml` runs lint → type-check → build → unit tests on every PR. PRs that fail CI cannot merge.
+yfb-backend: Manual deploy via supabase db push (migrations) and supabase functions deploy (Edge Functions). Never auto-deploy backend. CI via `.github/workflows/ci.yml` runs Deno type-check on all Edge Functions + validates migration numbering + checks RLS policies on every PR.
+yfb-ai-prompts: No direct deployment. Prompts are bundled into Edge Functions at backend deploy time. No CI workflow (content validation is manual via test personas).
+CI/CD: GitHub Actions on frontend and backend repos. On PR: lint, type-check, build, test. On merge to main: deploy (frontend only auto, backend manual). Agent guardrails (`.claude/hooks.json`) prevent cross-repo file edits before code even reaches CI.
 13. HANDOFF CHECKLIST (PER AGENT SESSION)
 Updated checklist for multi-agent workflow. Complete ALL items before closing ANY Claude Code session:
 All changes committed with descriptive messages.
@@ -367,6 +420,7 @@ All new files follow repo naming conventions.
 No TypeScript errors (npm run build / deno check).
 No ESLint errors.
 All tests passing.
+feature-tracker.json updated (status, blockers, contracts).
 i18n: No hardcoded strings (Frontend Agent).
 Accessibility: axe-core passes (Frontend Agent).
 RLS policies on all new tables (Backend Agent).

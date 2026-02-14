@@ -1,0 +1,86 @@
+{
+  "persona_id": "desk-worker-knee-pain",
+  "name": "Sarah Chen",
+  "age": 38,
+  "gender": "female",
+  "occupation": "Software engineer, desk job 8+ hours/day",
+  "training_experience": "intermediate",
+  "training_history": "2 years of group fitness classes, 6 months of strength training before knee injury. Stopped training 4 months ago.",
+  "goals": {
+    "primary": "fat_loss",
+    "secondary": "pain_reduction",
+    "tertiary": "strength"
+  },
+  "injuries": [
+    {
+      "location": "right_knee",
+      "type": "patellofemoral_pain",
+      "severity": "moderate",
+      "diagnosed": true,
+      "notes": "Pain with stairs and deep squats. Physio cleared for training with modifications."
+    }
+  ],
+  "equipment": {
+    "location": "commercial_gym",
+    "available": ["barbell", "dumbbells", "cables", "bands", "bench", "pull_up_bar", "leg_press"],
+    "not_available": ["specialty_bars", "reverse_hyper", "glute_ham_raise"]
+  },
+  "schedule": {
+    "days_per_week": 3,
+    "preferred_days": ["monday", "wednesday", "friday"],
+    "session_duration_minutes": 60,
+    "time_of_day": "morning"
+  },
+  "body_composition": {
+    "height_cm": 165,
+    "weight_kg": 72,
+    "body_fat_percent": 28,
+    "goal_weight_kg": 65
+  },
+  "lifestyle": {
+    "sleep_hours": 6.5,
+    "stress_level": "high",
+    "sitting_hours_per_day": 9,
+    "steps_per_day": 4000
+  },
+  "quiz_dimensions": {
+    "niche": "desk_worker_pain",
+    "experience_level": "intermediate",
+    "injury_flag": true,
+    "equipment_tier": "full_gym",
+    "time_commitment": "moderate"
+  },
+  "expected_plan_features": {
+    "must_include": [
+      "knee-friendly leg exercises (split squats, leg press, step-ups)",
+      "hip mobility work (prolonged sitting)",
+      "posterior chain emphasis (desk worker posture)",
+      "pull:push ratio 3:2 minimum",
+      "isometric knee strengthening progression",
+      "deload every 4th week"
+    ],
+    "must_exclude": [
+      "deep back squats",
+      "plyometric jumps",
+      "high-impact movements",
+      "exercises that load knee beyond 90° flexion initially"
+    ],
+    "must_progress": [
+      "knee flexion ROM gradually increases across phases",
+      "volume increases from Foundation to Accumulation",
+      "intensity increases from Accumulation to Realization"
+    ]
+  },
+  "expected_coach_interactions": [
+    {
+      "scenario": "reports_knee_pain_during_session",
+      "user_message": "My knee was hurting during the split squats today. Should I push through?",
+      "expected_behavior": "Coach should NEVER say push through pain. Should ask about pain type (sharp vs dull), suggest reducing ROM or load, and recommend contacting physio if sharp pain."
+    },
+    {
+      "scenario": "missed_sessions",
+      "user_message": "I haven't trained in a week, work has been crazy",
+      "expected_behavior": "Empathetic, no guilt. Acknowledge desk worker stress. Suggest modified session or at-minimum movement. Don't lecture."
+    }
+  ]
+}

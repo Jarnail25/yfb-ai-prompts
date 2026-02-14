@@ -1,0 +1,94 @@
+{
+  "project": "yfb-ai-prompts",
+  "last_updated": "2026-02-13",
+  "last_agent": "none",
+  "current_sprint": "pre-sprint",
+  "features": {
+    "training_methodology": {
+      "status": "not_started",
+      "sprint": 1,
+      "owner": "ai-agent",
+      "deps": [],
+      "notes": "prompts/plan-generation/methodology.md — GROUND TRUTH. Periodization rules, exercise selection philosophy."
+    },
+    "plan_system_prompt": {
+      "status": "not_started",
+      "sprint": 3,
+      "owner": "ai-agent",
+      "deps": ["training_methodology"],
+      "notes": "prompts/plan-generation/system-prompt.md + exercise-selection.md + injury-protocols.md."
+    },
+    "plan_output_schema": {
+      "status": "not_started",
+      "sprint": 3,
+      "owner": "ai-agent",
+      "deps": ["plan_system_prompt"],
+      "notes": "prompts/plan-generation/output-schema.json. Backend Agent parses against this."
+    },
+    "plan_few_shot_examples": {
+      "status": "not_started",
+      "sprint": 3,
+      "owner": "ai-agent",
+      "deps": ["plan_output_schema"],
+      "notes": "prompts/plan-generation/examples/. 3-5 complete plan examples for diverse user profiles."
+    },
+    "coach_personality": {
+      "status": "not_started",
+      "sprint": 4,
+      "owner": "ai-agent",
+      "deps": [],
+      "notes": "prompts/coach-chat/personality.md — GROUND TRUTH for coach voice. See Future Roadmap item 3."
+    },
+    "coach_system_prompt": {
+      "status": "not_started",
+      "sprint": 4,
+      "owner": "ai-agent",
+      "deps": ["coach_personality"],
+      "notes": "prompts/coach-chat/system-prompt.md + boundaries.md."
+    },
+    "coach_checkin_templates": {
+      "status": "not_started",
+      "sprint": 4,
+      "owner": "ai-agent",
+      "deps": ["coach_system_prompt"],
+      "notes": "prompts/coach-chat/check-in-templates/. Weekly automated messages."
+    },
+    "supplement_prompts": {
+      "status": "not_started",
+      "sprint": 5,
+      "owner": "ai-agent",
+      "deps": [],
+      "notes": "prompts/supplement-analysis/system-prompt.md + marker-reference.md."
+    },
+    "nutrition_prompts": {
+      "status": "not_started",
+      "sprint": 5,
+      "owner": "ai-agent",
+      "deps": [],
+      "notes": "prompts/nutrition/system-prompt.md + meal-plan-rules.md."
+    },
+    "test_personas": {
+      "status": "not_started",
+      "sprint": 1,
+      "owner": "ai-agent",
+      "deps": [],
+      "notes": "tests/personas/. 20+ JSON personas. Start with 3-5 starters, expand through sprints."
+    },
+    "plan_validation_tests": {
+      "status": "not_started",
+      "sprint": 6,
+      "owner": "ai-agent",
+      "deps": ["plan_output_schema", "test_personas"],
+      "notes": "tests/plan-validation.ts. Automated safety checks on generated plans."
+    },
+    "coach_behavior_tests": {
+      "status": "not_started",
+      "sprint": 6,
+      "owner": "ai-agent",
+      "deps": ["coach_system_prompt", "test_personas"],
+      "notes": "tests/coach-behavior.ts. Coach stays in character, within boundaries."
+    }
+  },
+  "active_contracts": {},
+  "blockers": []
+}

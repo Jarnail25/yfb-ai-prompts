@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "bash -c 'INPUT=\"$CLAUDE_TOOL_INPUT\"; echo \"$INPUT\" | grep -qE \"(src/|supabase/|migrations/|functions/)\" && echo \"BLOCKED: AI Agent cannot modify application code. This repo is prompts, schemas, and test data ONLY.\" && exit 2 || exit 0'"
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": "bash -c 'INPUT=\"$CLAUDE_TOOL_INPUT\"; echo \"$INPUT\" | grep -qE \"\\.env\" && echo \"BLOCKED: AI Prompts repo should never contain environment files or secrets.\" && exit 2 || exit 0'"
+      }
+    ]
+  }
+}

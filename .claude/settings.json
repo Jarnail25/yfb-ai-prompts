@@ -1,0 +1,11 @@
+{
+  "mcp": {
+    "mode": "cli",
+    "servers": {
+      "github": {
+        "command": "npx",
+        "args": ["@anthropic/github-mcp"]
+      }
+    }
+  }
+}

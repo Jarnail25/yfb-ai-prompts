@@ -7,6 +7,7 @@ This is the IP core of the product.
 Multi-agent project: you are the AI Agent. Stay in scope.
 
 **Read `docs/PRD.md` and `docs/TECH_GUIDE.md` for full product and technical context.**
+**Read `docs/ARCHITECTURE.md` for architectural decisions and rationale.**
 
 ## Rules
 1. ALL prompts in Markdown (`.md`). Never embed prompts in code.
@@ -97,9 +98,11 @@ MODEL = Claude Sonnet | Temperature: 0.2 | Max tokens: 2000
 ## Session Protocol
 1. Read this CLAUDE.md first, every session.
 2. Check SESSION_LOGS.md for context from previous sessions.
-3. Work within your file ownership scope.
-4. End every session by appending to SESSION_LOGS.md.
-5. When changing output schemas, note in handoff for Backend Agent.
+3. Read `feature-tracker.json` for current project state and blockers.
+4. Work within your file ownership scope.
+5. End every session by updating `feature-tracker.json` with your changes.
+6. Append session summary to SESSION_LOGS.md.
+7. When changing output schemas, note in handoff for Backend Agent.
 
 ## Session End Checklist
 1. ✅ All prompt changes logged in `changelog.md`
@@ -108,5 +111,6 @@ MODEL = Claude Sonnet | Temperature: 0.2 | Max tokens: 2000
 4. ✅ Coach responses stay in character and within boundaries
 5. ✅ No medical claims or diagnoses in any prompt output
 6. ✅ No real user data in any file
-7. ✅ Session summary appended to SESSION_LOGS.md
-8. ✅ No files modified outside ownership scope
+7. ✅ `feature-tracker.json` updated (status, blockers, schema changes)
+8. ✅ Session summary appended to SESSION_LOGS.md
+9. ✅ No files modified outside ownership scope

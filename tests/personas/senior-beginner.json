@@ -1,0 +1,95 @@
+{
+  "persona_id": "senior-beginner",
+  "name": "Robert Andersen",
+  "age": 62,
+  "gender": "male",
+  "occupation": "Retired teacher",
+  "training_experience": "beginner",
+  "training_history": "Walks daily. No structured strength training ever. Doctor recommended starting resistance training for bone density and balance.",
+  "goals": {
+    "primary": "health_longevity",
+    "secondary": "balance_stability",
+    "tertiary": "strength"
+  },
+  "injuries": [
+    {
+      "location": "lower_back",
+      "type": "chronic_stiffness",
+      "severity": "mild",
+      "diagnosed": false,
+      "notes": "General stiffness from decades of desk work. No acute injury. No imaging done."
+    },
+    {
+      "location": "left_shoulder",
+      "type": "reduced_rom",
+      "severity": "mild",
+      "diagnosed": false,
+      "notes": "Can't reach behind back easily. No pain, just tightness."
+    }
+  ],
+  "equipment": {
+    "location": "home_minimal",
+    "available": ["bands", "light_dumbbells"],
+    "not_available": ["barbell", "bench", "squat_rack", "cables", "machines", "pull_up_bar"]
+  },
+  "schedule": {
+    "days_per_week": 3,
+    "preferred_days": ["monday", "wednesday", "friday"],
+    "session_duration_minutes": 40,
+    "time_of_day": "morning"
+  },
+  "body_composition": {
+    "height_cm": 178,
+    "weight_kg": 85,
+    "body_fat_percent": 25,
+    "goal_weight_kg": 80
+  },
+  "lifestyle": {
+    "sleep_hours": 7,
+    "stress_level": "low",
+    "sitting_hours_per_day": 5,
+    "steps_per_day": 8000
+  },
+  "quiz_dimensions": {
+    "niche": "senior_longevity",
+    "experience_level": "beginner",
+    "injury_flag": true,
+    "equipment_tier": "minimal_home",
+    "time_commitment": "moderate"
+  },
+  "expected_plan_features": {
+    "must_include": [
+      "balance and stability exercises in every session",
+      "bodyweight fundamentals before loading",
+      "extended warm-up with joint mobility focus",
+      "shoulder ROM progressions (overhead reach, external rotation)",
+      "hip hinge pattern with band/bodyweight before any loaded hinge",
+      "lower volume than younger users (recovery capacity)",
+      "clear RPE guidance calibrated for beginners (not assumed familiarity)"
+    ],
+    "must_exclude": [
+      "heavy barbell movements (no equipment + beginner)",
+      "plyometrics or explosive movements (fall risk)",
+      "overhead pressing beyond comfortable ROM",
+      "exercises requiring floor-to-standing transitions without modification options"
+    ],
+    "must_progress": [
+      "ROM gradually increases for shoulder exercises",
+      "balance exercises progress from bilateral to unilateral",
+      "load increases very conservatively (bands → light dumbbells → moderate dumbbells)",
+      "session duration can increase from 40 to 50 minutes in later phases"
+    ]
+  },
+  "expected_coach_interactions": [
+    {
+      "scenario": "confused_by_exercise",
+      "user_message": "What is a hip hinge? I don't understand the exercise description.",
+      "expected_behavior": "Coach should explain in plain language, no jargon. Use everyday analogies ('like picking up a grocery bag from the floor by bending at your hips, not your back'). Offer to simplify further."
+    },
+    {
+      "scenario": "feeling_intimidated",
+      "user_message": "I feel like this program is too advanced for me. Maybe I'm too old for this.",
+      "expected_behavior": "Warmly reassuring. Emphasize that the program is designed for his level. Celebrate that he's started. Reference that strength training is especially beneficial after 60. No toxic positivity — genuine encouragement."
+    }
+  ]
+}
