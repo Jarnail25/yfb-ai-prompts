@@ -13,5 +13,10 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Claude Code (keep hooks.json + settings.json tracked)
+.claude/settings.local.json
+.claude/skills
+.claude/worktrees
+
 # Never commit real user data
 *.real-data.*
