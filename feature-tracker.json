@@ -1,29 +1,36 @@
 {
   "project": "yfb-ai-prompts",
-  "last_updated": "2026-02-13",
-  "last_agent": "none",
-  "current_sprint": "pre-sprint",
+  "last_updated": "2026-03-01",
+  "last_agent": "ai-agent",
+  "current_sprint": "sprint-3",
   "features": {
     "training_methodology": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 1,
       "owner": "ai-agent",
       "deps": [],
-      "notes": "prompts/plan-generation/methodology.md — GROUND TRUTH. Periodization rules, exercise selection philosophy."
+      "notes": "prompts/plan-generation/methodology.md — GROUND TRUTH. Periodization rules, exercise selection philosophy. Created in Session 1 (2026-02-08)."
     },
     "plan_system_prompt": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 3,
       "owner": "ai-agent",
       "deps": ["training_methodology"],
-      "notes": "prompts/plan-generation/system-prompt.md + exercise-selection.md + injury-protocols.md."
+      "notes": "prompts/plan-generation/system-prompt.md + exercise-selection.md + injury-protocols.md. Created in Session 1 (2026-02-08)."
     },
     "plan_output_schema": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 3,
       "owner": "ai-agent",
       "deps": ["plan_system_prompt"],
-      "notes": "prompts/plan-generation/output-schema.json. Backend Agent parses against this."
+      "notes": "prompts/plan-generation/output-schema.json. UPGRADED to v3.1 (2026-03-01): 6-block A-F structure, validation_checks, warm_ups, deload_protocol, readiness_assessment, weekly_progression, substitutions per exercise."
+    },
+    "plan_constraint_files": {
+      "status": "complete",
+      "sprint": 3,
+      "owner": "ai-agent",
+      "deps": ["plan_system_prompt"],
+      "notes": "v3.1 addition (2026-03-01). 5 new files: block-taxonomy.md, plan-generation-constraints.md, exercise-bank-schema.json, progression-rules.json. Provides structured data and hard validation rules for AI plan generation."
     },
     "plan_few_shot_examples": {
       "status": "not_started",
@@ -37,7 +44,7 @@
       "sprint": 4,
       "owner": "ai-agent",
       "deps": [],
-      "notes": "prompts/coach-chat/personality.md — GROUND TRUTH for coach voice. See Future Roadmap item 3."
+      "notes": "prompts/coach-chat/personality.md — GROUND TRUTH for coach voice."
     },
     "coach_system_prompt": {
       "status": "not_started",
@@ -68,11 +75,11 @@
       "notes": "prompts/nutrition/system-prompt.md + meal-plan-rules.md."
     },
     "test_personas": {
-      "status": "not_started",
+      "status": "in_progress",
       "sprint": 1,
       "owner": "ai-agent",
       "deps": [],
-      "notes": "tests/personas/. 20+ JSON personas. Start with 3-5 starters, expand through sprints."
+      "notes": "tests/personas/. 3 personas created (2026-02-08): beginner-knee-injury-home-gym, advanced-martial-artist-full-gym, senior-multiple-injuries-minimal-equip. Target: 20+."
     },
     "plan_validation_tests": {
       "status": "not_started",
@@ -89,6 +96,20 @@
       "notes": "tests/coach-behavior.ts. Coach stays in character, within boundaries."
     }
   },
-  "active_contracts": {},
-  "blockers": []
+  "active_contracts": {
+    "output_schema_v3_1": {
+      "type": "schema",
+      "name": "plan-generation-output-schema.json",
+      "version": "3.1",
+      "breaking_changes": "Blocks expanded from A-D to A-F. validation_checks object added to plan_metadata. warm_ups, deload_protocol, readiness_assessment now required top-level fields. Backend generate-plan Edge Function must be updated to match.",
+      "notes": "Backend Agent: the existing generate-plan function parses against the old 4-block schema. Must update to handle 6 blocks (E: Hypertrophy, F: Accessory) and new top-level fields."
+    }
+  },
+  "blockers": [
+    {
+      "feature": "plan_output_schema",
+      "blocker": "Backend generate-plan Edge Function still uses old 4-block output schema. Must be updated to parse v3.1 schema with 6 blocks + validation_checks.",
+      "severity": "blocking"
+    }
+  ]
 }

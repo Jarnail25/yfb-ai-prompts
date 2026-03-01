@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "YFB Exercise Bank Schema",
+  "version": "1.0",
+  "description": "Curated exercise database for AI plan generation. Categorized by movement pattern, equipment, block assignment, and session specificity. Extracted from validated 12-week training plan methodology.",
+  "exercise_categories": {
+    "squat_patterns": {
+      "bilateral": [
+        { "id": "SQ-001", "name": "Bulgarian Split Squat", "equipment": ["dumbbells", "bench"], "block": "A", "sessions": ["A"], "phases": ["P1", "P2", "P3"], "substitutes": ["SQ-004", "SQ-005", "SQ-006"] },
+        { "id": "SQ-002", "name": "Cossack Squat", "equipment": ["kettlebell"], "block": "A", "sessions": ["B"], "phases": ["P1", "P2", "P3"], "substitutes": ["SQ-007", "SQ-008", "SQ-009"] },
+        { "id": "SQ-003", "name": "Cyclist Squat (heel elevated)", "equipment": ["dumbbells", "wedge"], "block": "B", "sessions": ["C"], "phases": ["P1", "P2"], "substitutes": ["SQ-009"] },
+        { "id": "SQ-004", "name": "Reverse Lunge", "equipment": ["dumbbells"], "block": "A", "sessions": ["A"], "substitutes": ["SQ-001"] },
+        { "id": "SQ-005", "name": "Step-Up (high box)", "equipment": ["dumbbells", "box"], "block": "A", "sessions": ["A"], "substitutes": ["SQ-001"] },
+        { "id": "SQ-006", "name": "Walking Lunge", "equipment": ["dumbbells"], "block": "A", "sessions": ["A"], "substitutes": ["SQ-001"] },
+        { "id": "SQ-007", "name": "Lateral Lunge", "equipment": ["dumbbells"], "block": "A", "sessions": ["B"], "substitutes": ["SQ-002"] },
+        { "id": "SQ-008", "name": "Lateral Step-Up", "equipment": ["dumbbells", "box"], "block": "A", "sessions": ["B"], "substitutes": ["SQ-002"] },
+        { "id": "SQ-009", "name": "Sumo Squat", "equipment": ["kettlebell"], "block": "A", "sessions": ["B"], "substitutes": ["SQ-002"] }
+      ],
+      "single_leg_progression": [
+        { "id": "SQ-010", "name": "Ring-Assisted Pistol Squat", "equipment": ["rings"], "block": "C", "sessions": ["A"], "phases": ["P1", "P2"], "note": "12-week progression goal" },
+        { "id": "SQ-011", "name": "Pistol Squat (freestanding)", "equipment": [], "block": "C", "sessions": ["A"], "phases": ["P3"], "note": "Phase 3 test" }
+      ]
+    },
+    "hip_hinge_patterns": [
+      { "id": "HH-001", "name": "Hex Bar Deadlift", "equipment": ["hex_bar"], "block": "A", "sessions": ["C", "D"], "phases": ["P1", "P2", "P3"], "substitutes": ["HH-002", "HH-003"] },
+      { "id": "HH-002", "name": "Barbell RDL", "equipment": ["barbell"], "block": "A", "sessions": ["C"], "substitutes": ["HH-001"] },
+      { "id": "HH-003", "name": "KB Sumo Deadlift", "equipment": ["kettlebell"], "block": "A", "sessions": ["C"], "substitutes": ["HH-001"] },
+      { "id": "HH-004", "name": "Single-Leg RDL", "equipment": ["dumbbells"], "block": "B", "sessions": ["C"], "phases": ["P2", "P3"] },
+      { "id": "HH-005", "name": "KB Swing", "equipment": ["kettlebell"], "block": "B", "sessions": ["C"], "phases": ["P3"] }
+    ],
+    "vertical_pull": [
+      { "id": "VP-001", "name": "Pull-Up (wide overhand)", "equipment": ["pull_up_bar"], "block": "A", "sessions": ["A"], "phases": ["P1", "P2", "P3"], "substitutes": ["VP-004", "VP-005", "VP-006"] },
+      { "id": "VP-002", "name": "Weighted Pull-Up", "equipment": ["pull_up_bar", "weight_belt"], "block": "A", "sessions": ["A", "D"], "phases": ["P2", "P3"] },
+      { "id": "VP-003", "name": "Explosive Pull-Up", "equipment": ["pull_up_bar"], "block": "A", "sessions": ["A"], "phases": ["P3"], "note": "Contrast pair with VP-002" },
+      { "id": "VP-004", "name": "Inverted Row (rings)", "equipment": ["rings"], "substitutes": ["VP-001"] },
+      { "id": "VP-005", "name": "Lat Pulldown (band)", "equipment": ["bands"], "substitutes": ["VP-001"] },
+      { "id": "VP-006", "name": "Negative Pull-Up", "equipment": ["pull_up_bar"], "substitutes": ["VP-001"] }
+    ],
+    "horizontal_pull": [
+      { "id": "HP-001", "name": "Gorilla Row", "equipment": ["kettlebells"], "block": "A", "sessions": ["B"], "phases": ["P1"] },
+      { "id": "HP-002", "name": "Pendlay Row", "equipment": ["barbell"], "block": "A", "sessions": ["B"], "phases": ["P2", "P3"], "substitutes": ["HP-003", "HP-004", "HP-005"] },
+      { "id": "HP-003", "name": "Barbell Bent Row", "equipment": ["barbell"], "substitutes": ["HP-002"] },
+      { "id": "HP-004", "name": "T-Bar Row", "equipment": ["landmine", "barbell"], "substitutes": ["HP-002"] },
+      { "id": "HP-005", "name": "Heavy Inverted Row", "equipment": ["rings"], "substitutes": ["HP-002"] },
+      { "id": "HP-006", "name": "Chest-Supported Row", "equipment": ["dumbbells", "bench"], "block": "E", "sessions": ["C"], "phases": ["P2"] },
+      { "id": "HP-007", "name": "Seal Row", "equipment": ["dumbbells", "bench"], "block": "E", "sessions": ["C"], "phases": ["P3"] }
+    ],
+    "pressing": {
+      "overhead": [
+        { "id": "PR-001", "name": "DB Overhead Press (standing)", "equipment": ["dumbbells"], "block": "A", "sessions": ["C"], "phases": ["P1"], "substitutes": ["PR-002", "PR-003", "PR-004"] },
+        { "id": "PR-002", "name": "DB Overhead Press (seated)", "equipment": ["dumbbells", "bench"], "block": "A", "sessions": ["C"], "phases": ["P2"] },
+        { "id": "PR-003", "name": "Push Press", "equipment": ["barbell"], "block": "A", "sessions": ["C"], "phases": ["P3"] },
+        { "id": "PR-004", "name": "Landmine Press", "equipment": ["landmine", "barbell"], "substitutes": ["PR-001"] }
+      ],
+      "horizontal": [
+        { "id": "PR-010", "name": "Incline DB Press", "equipment": ["dumbbells", "bench"], "block": "B", "sessions": ["A", "C"], "phases": ["P1", "P2"] },
+        { "id": "PR-011", "name": "DB Floor Press", "equipment": ["dumbbells"], "block": "B", "sessions": ["A"], "phases": ["P2"] },
+        { "id": "PR-012", "name": "Explosive Push-Up", "equipment": [], "block": "B", "sessions": ["A", "C"], "phases": ["P3"] },
+        { "id": "PR-013", "name": "Ring Dips", "equipment": ["rings"], "block": "B", "sessions": ["B"], "phases": ["P1", "P2", "P3"], "substitutes": ["PR-014", "PR-015"] },
+        { "id": "PR-014", "name": "Parallel Bar Dip", "equipment": ["dip_bars"], "substitutes": ["PR-013"] },
+        { "id": "PR-015", "name": "Decline Push-Up", "equipment": ["bench"], "substitutes": ["PR-013"] }
+      ]
+    },
+    "knee_prehab_mandatory": [
+      { "id": "KP-001", "name": "Nordic Curl (eccentric)", "equipment": [], "block": "B", "sessions": ["ALL"], "phases": ["P1"], "position": "B1", "mandatory": true },
+      { "id": "KP-002", "name": "Nordic Curl (full range, band-assisted)", "equipment": ["bands"], "block": "B", "sessions": ["ALL"], "phases": ["P2"], "position": "B1", "mandatory": true },
+      { "id": "KP-003", "name": "Nordic Curl (full concentric)", "equipment": [], "block": "B", "sessions": ["ALL"], "phases": ["P3"], "position": "B1", "mandatory": true },
+      { "id": "KP-004", "name": "Reverse Nordic Curl", "equipment": [], "block": "B", "sessions": ["B"], "phases": ["P1", "P2", "P3"], "note": "VMO strengthening" }
+    ],
+    "rotation": [
+      { "id": "RT-001", "name": "Pallof Press (half-kneeling)", "equipment": ["bands"], "block": "B", "sessions": ["A"], "phases": ["P1"], "position": "B3" },
+      { "id": "RT-002", "name": "Woodchop (band, high-to-low)", "equipment": ["bands"], "block": "B", "sessions": ["B"], "phases": ["P1"], "position": "B3" },
+      { "id": "RT-003", "name": "Landmine Rotation (half-kneeling)", "equipment": ["landmine", "barbell"], "block": "B", "sessions": ["A", "B"], "phases": ["P2"], "position": "B3" },
+      { "id": "RT-004", "name": "Landmine Rotation (standing, explosive)", "equipment": ["landmine", "barbell"], "block": "B", "sessions": ["B"], "phases": ["P2"], "position": "B3" },
+      { "id": "RT-005", "name": "Med Ball Rotational Slam", "equipment": ["med_ball"], "block": "B", "sessions": ["A", "B"], "phases": ["P3"], "position": "B3" },
+      { "id": "RT-006", "name": "Med Ball Lateral Throw (wall)", "equipment": ["med_ball", "wall"], "block": "B", "sessions": ["B"], "phases": ["P3"], "position": "B3" }
+    ],
+    "isometric_end_range": [
+      { "id": "ISO-001", "name": "Hip Flexor PAILs/RAILs", "equipment": [], "block": "C", "sessions": ["A"], "phases": ["P1", "P2"] },
+      { "id": "ISO-002", "name": "Adductor PAILs/RAILs (90/90)", "equipment": [], "block": "C", "sessions": ["B"], "phases": ["P1", "P2"] },
+      { "id": "ISO-003", "name": "Hamstring PAILs/RAILs", "equipment": ["bench"], "block": "C", "sessions": ["C"], "phases": ["P1", "P2"] },
+      { "id": "ISO-004", "name": "Overcoming Isometric Pull-Up (3 positions)", "equipment": ["pull_up_bar", "strap"], "block": "C", "sessions": ["A"], "phases": ["P2"] },
+      { "id": "ISO-005", "name": "Overcoming Isometric Deadlift (mid-shin)", "equipment": ["barbell", "pins"], "block": "C", "sessions": ["C"], "phases": ["P2"] },
+      { "id": "ISO-006", "name": "Overcoming Isometric Row (mid-range)", "equipment": ["barbell", "pins"], "block": "C", "sessions": ["B"], "phases": ["P2"] },
+      { "id": "ISO-007", "name": "Wall Sit (long ISO)", "equipment": [], "block": "C", "sessions": ["A"], "phases": ["P1"] },
+      { "id": "ISO-008", "name": "Wall Sit (single-leg)", "equipment": [], "block": "C", "sessions": ["A"], "phases": ["P2"] },
+      { "id": "ISO-009", "name": "Thoracic Spine Extension on Foam Roller", "equipment": ["foam_roller"], "block": "C", "sessions": ["A"], "phases": ["P1"] },
+      { "id": "ISO-010", "name": "Deep Squat Hold (goblet)", "equipment": ["kettlebell"], "block": "C", "sessions": ["C"], "phases": ["P1"] },
+      { "id": "ISO-011", "name": "BSS ISO Hold (bottom, loaded)", "equipment": ["dumbbells"], "block": "C", "sessions": ["A"], "phases": ["P3"] },
+      { "id": "ISO-012", "name": "Overhead Carry (KB, single-arm)", "equipment": ["kettlebell"], "block": "C", "sessions": ["C"], "phases": ["P2"] }
+    ],
+    "core": {
+      "anti_movement_P1": [
+        { "id": "CO-001", "name": "Dead Bug (contralateral)", "block": "D", "position": "D1" },
+        { "id": "CO-002", "name": "Side Plank", "block": "D", "position": "D2" },
+        { "id": "CO-003", "name": "Pallof Rotation (band)", "block": "D", "position": "D1" },
+        { "id": "CO-004", "name": "Bird Dog", "block": "D", "position": "D1" },
+        { "id": "CO-005", "name": "Hollow Body Hold", "block": "D", "position": "D2" }
+      ],
+      "loaded_P2": [
+        { "id": "CO-010", "name": "Ab Wheel Rollout", "block": "D", "position": "D1" },
+        { "id": "CO-011", "name": "Copenhagen Plank", "block": "D", "position": "D2" },
+        { "id": "CO-012", "name": "Turkish Get-Up", "block": "D", "position": "D2" },
+        { "id": "CO-013", "name": "Farmer's Carry (bilateral)", "block": "D", "position": "D2" },
+        { "id": "CO-014", "name": "Suitcase Carry (unilateral)", "block": "D", "position": "D2" },
+        { "id": "CO-015", "name": "Side Bend (heavy DB)", "block": "D", "position": "D3" },
+        { "id": "CO-016", "name": "Rotational Cable/Band Chop", "block": "D", "position": "D1" }
+      ],
+      "explosive_P3": [
+        { "id": "CO-020", "name": "Hanging Knee/Leg Raise (explosive)", "block": "D", "position": "D1" },
+        { "id": "CO-021", "name": "Plank to Push-Up (dynamic)", "block": "D", "position": "D2" },
+        { "id": "CO-022", "name": "Med Ball Overhead Slam", "block": "D", "position": "D1" },
+        { "id": "CO-023", "name": "L-Sit Hold (rings/dip bars)", "block": "D", "position": "D2" },
+        { "id": "CO-024", "name": "Med Ball Complex (slam+rotation+chest pass)", "block": "D", "position": "D1" }
+      ],
+      "spinal_extensors_all_phases": [
+        { "id": "CO-030", "name": "Back Extension (BW)", "block": "D", "position": "D3", "phases": ["P1"] },
+        { "id": "CO-031", "name": "Back Extension (weighted)", "block": "D", "position": "D3", "phases": ["P2"] },
+        { "id": "CO-032", "name": "Back Extension (explosive)", "block": "D", "position": "D3", "phases": ["P3"] },
+        { "id": "CO-033", "name": "GHD Back Extension (weighted)", "equipment": ["GHD"], "block": "D", "position": "D3", "phases": ["P2"] },
+        { "id": "CO-034", "name": "QL Side Lying Hold (Roman chair)", "equipment": ["roman_chair"], "block": "D", "position": "D3" }
+      ]
+    },
+    "neck_mandatory": [
+      { "id": "NK-001", "name": "Band Neck Isometrics (4-way)", "equipment": ["bands"], "block": "D", "position": "D4", "phases": ["P1"], "mandatory": true },
+      { "id": "NK-002", "name": "Band Neck Strengthening (4-way dynamic)", "equipment": ["bands"], "block": "D", "position": "D4", "phases": ["P2"], "mandatory": true },
+      { "id": "NK-003", "name": "Neck Harness/Heavy Band (4-way sport speed)", "equipment": ["bands"], "block": "D", "position": "D4", "phases": ["P3"], "mandatory": true }
+    ],
+    "accessory_f_block": {
+      "lower_day_pair": [
+        { "id": "AC-001", "name": "SL Calf Raise (eccentric focus)", "sessions": ["A", "C"], "all_phases": true },
+        { "id": "AC-002", "name": "Tibialis Raise", "sessions": ["A", "C"], "all_phases": true }
+      ],
+      "upper_day_pair": [
+        { "id": "AC-003", "name": "Dead Hang", "sessions": ["B", "D"], "all_phases": true },
+        { "id": "AC-004", "name": "Wrist Roller (KB)", "sessions": ["B", "D"], "all_phases": true }
+      ]
+    },
+    "plyometrics": [
+      { "id": "PLY-001", "name": "Box Jump (stick landing)", "sessions": ["D"], "phases": ["P1"] },
+      { "id": "PLY-002", "name": "Depth Jump (box to broad)", "sessions": ["D"], "phases": ["P2"] },
+      { "id": "PLY-003", "name": "Jump Lunge (contrast pair)", "sessions": ["A"], "phases": ["P3"] },
+      { "id": "PLY-004", "name": "Lateral Bound", "sessions": ["B"], "phases": ["P3"] },
+      { "id": "PLY-005", "name": "Broad Jump (contrast pair)", "sessions": ["C"], "phases": ["P3"] },
+      { "id": "PLY-006", "name": "Multi-Directional Plyometric Circuit", "sessions": ["D"], "phases": ["P3"] },
+      { "id": "PLY-007", "name": "Single-Leg Hop and Stick", "sessions": ["C"], "phases": ["P3"], "note": "ACL-specific reactive landing" },
+      { "id": "PLY-008", "name": "Med Ball Chest Pass (wall)", "sessions": ["D"], "phases": ["P1", "P2"] }
+    ]
+  },
+  "equipment_mapping": {
+    "home_gym_full": ["barbell", "dumbbells", "kettlebells", "pull_up_bar", "bench", "squat_rack", "rings", "bands", "foam_roller", "hex_bar", "dip_bars", "landmine", "med_ball"],
+    "home_gym_minimal": ["dumbbells", "bands", "pull_up_bar", "bench"],
+    "commercial_gym": ["barbell", "dumbbells", "kettlebells", "cables", "machines", "pull_up_bar", "bench", "squat_rack", "leg_press", "GHD", "roman_chair"],
+    "bodyweight_only": ["pull_up_bar", "bands"]
+  }
+}

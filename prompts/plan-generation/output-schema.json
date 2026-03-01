@@ -1,49 +1,58 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yfb://schemas/training-plan-output",
-  "title": "TrainingPlanOutput",
-  "description": "Complete periodized training plan output from AI plan generation. Backend Edge Functions parse and validate against this schema using Zod.",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "YFB Plan Generation Output Schema",
+  "description": "The exact JSON structure the AI plan generation engine must output. This is parsed and stored in Supabase as structured data. Version 1.0 — March 2026",
   "type": "object",
-  "required": ["plan_name", "user_id", "total_weeks", "sessions_per_week", "session_duration_minutes", "phases", "plan_notes", "generated_at"],
+  "required": ["plan_metadata", "phases", "warm_ups", "deload_protocol", "readiness_assessment"],
   "properties": {
-    "plan_name": {
-      "type": "string",
-      "description": "Personalized plan name based on user's primary goal and profile (e.g., 'Power & Knee Recovery — 12 Week Program')"
-    },
-    "user_id": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "total_weeks": {
-      "type": "integer",
-      "minimum": 8,
-      "maximum": 16
-    },
-    "sessions_per_week": {
-      "type": "integer",
-      "minimum": 2,
-      "maximum": 6
-    },
-    "session_duration_minutes": {
-      "type": "integer",
-      "minimum": 30,
-      "maximum": 120
-    },
-    "equipment_available": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Equipment confirmed available from user quiz"
-    },
-    "injuries_addressed": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["area", "type", "severity", "protocol_applied"],
-        "properties": {
-          "area": { "type": "string" },
-          "type": { "type": "string" },
-          "severity": { "type": "integer", "minimum": 1, "maximum": 10 },
-          "protocol_applied": { "type": "string", "description": "Name of injury protocol applied from injury-protocols.md" }
+    "plan_metadata": {
+      "type": "object",
+      "required": ["plan_id", "user_id", "generated_at", "methodology_version", "duration_weeks", "sessions_per_week", "equipment_profile", "injury_flags"],
+      "properties": {
+        "plan_id": { "type": "string", "format": "uuid" },
+        "user_id": { "type": "string", "format": "uuid" },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "methodology_version": { "type": "string", "const": "cressey-hybrid-v1" },
+        "duration_weeks": { "type": "integer", "enum": [8, 12] },
+        "sessions_per_week": { "type": "integer", "minimum": 3, "maximum": 4 },
+        "equipment_profile": {
+          "type": "object",
+          "properties": {
+            "location": { "type": "string", "enum": ["home_gym", "commercial_gym", "both", "minimal"] },
+            "available": { "type": "array", "items": { "type": "string" } },
+            "not_available": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "injury_flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "location": { "type": "string" },
+              "type": { "type": "string" },
+              "severity": { "type": "string", "enum": ["mild", "moderate", "severe"] },
+              "contraindicated_movements": { "type": "array", "items": { "type": "string" } },
+              "required_prehab": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "validation_checks": {
+          "type": "object",
+          "description": "AI self-check results — all must be true",
+          "properties": {
+            "block_order_correct": { "type": "boolean" },
+            "deload_weeks_present": { "type": "boolean" },
+            "nordic_curl_every_session": { "type": "boolean" },
+            "neck_work_every_session": { "type": "boolean" },
+            "pull_push_ratio_met": { "type": "boolean" },
+            "f_block_distributed": { "type": "boolean" },
+            "isometric_progression_correct": { "type": "boolean" },
+            "core_progression_correct": { "type": "boolean" },
+            "no_equipment_violations": { "type": "boolean" },
+            "no_injury_violations": { "type": "boolean" },
+            "rep_ranges_match_phase": { "type": "boolean" },
+            "e_block_varies_by_session": { "type": "boolean" }
+          }
         }
       }
     },
@@ -51,232 +60,187 @@
       "type": "array",
       "minItems": 3,
       "maxItems": 3,
-      "items": { "$ref": "#/$defs/phase" }
-    },
-    "plan_notes": {
-      "type": "object",
-      "required": ["safety_notes", "progression_notes"],
-      "properties": {
-        "safety_notes": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "Injury-specific safety reminders, medical consultation notes"
-        },
-        "progression_notes": {
-          "type": "string",
-          "description": "General guidance on progressing loads, when to increase weight"
-        },
-        "equipment_notes": {
-          "type": "string",
-          "description": "Notes on equipment substitutions made, if any"
+      "items": {
+        "type": "object",
+        "required": ["phase_number", "phase_name", "weeks", "goal", "sessions"],
+        "properties": {
+          "phase_number": { "type": "integer", "minimum": 1, "maximum": 3 },
+          "phase_name": { "type": "string", "enum": ["Foundation", "Accumulation", "Realization"] },
+          "weeks": {
+            "type": "object",
+            "properties": {
+              "start": { "type": "integer" },
+              "end": { "type": "integer" },
+              "deload_week": { "type": "integer" }
+            }
+          },
+          "goal": { "type": "string" },
+          "rep_range_primary": { "type": "string" },
+          "tempo_emphasis": { "type": "string" },
+          "rpe_range": { "type": "string" },
+          "isometric_type": { "type": "string", "enum": ["yielding", "overcoming", "reactive"] },
+          "core_emphasis": { "type": "string", "enum": ["anti-movement", "loaded", "explosive"] },
+          "end_range_type": { "type": "string", "enum": ["passive-to-active", "loaded", "dynamic-maintenance"] },
+          "sessions": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 4,
+            "items": { "$ref": "#/definitions/session" }
+          }
         }
       }
     },
-    "generated_at": {
-      "type": "string",
-      "format": "date-time"
+    "warm_ups": {
+      "type": "object",
+      "description": "Phase-specific warm-up protocols per session type",
+      "properties": {
+        "phase_1": { "$ref": "#/definitions/warm_up_protocol" },
+        "phase_2": { "$ref": "#/definitions/warm_up_protocol" },
+        "phase_3": { "$ref": "#/definitions/warm_up_protocol" }
+      }
+    },
+    "deload_protocol": {
+      "type": "object",
+      "properties": {
+        "volume_reduction_percent": { "type": "integer", "minimum": 40, "maximum": 50 },
+        "intensity_percent_of_peak": { "type": "integer", "minimum": 60, "maximum": 70 },
+        "rpe_cap": { "type": "number", "maximum": 6 },
+        "blocks_to_reduce": { "type": "array", "items": { "type": "string" } },
+        "blocks_to_maintain": { "type": "array", "items": { "type": "string" }, "description": "C Block and warm-up always maintained" }
+      }
+    },
+    "readiness_assessment": {
+      "type": "object",
+      "properties": {
+        "factors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "scale_min": { "type": "integer", "const": 1 },
+              "scale_max": { "type": "integer", "const": 10 }
+            }
+          }
+        },
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "train_as_planned": { "type": "string" },
+            "reduce_rpe_1": { "type": "string" },
+            "reduce_rpe_2": { "type": "string" },
+            "active_recovery_only": { "type": "string" }
+          }
+        }
+      }
     }
   },
-  "$defs": {
-    "phase": {
-      "type": "object",
-      "required": ["phase_number", "name", "weeks", "focus", "rpe_range", "sessions"],
-      "properties": {
-        "phase_number": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 3
-        },
-        "name": {
-          "type": "string",
-          "enum": ["Foundation", "Accumulation", "Realization"]
-        },
-        "weeks": {
-          "type": "integer",
-          "minimum": 2,
-          "maximum": 5
-        },
-        "focus": {
-          "type": "string",
-          "description": "Phase focus description (e.g., 'Movement quality, work capacity, tissue preparation')"
-        },
-        "rpe_range": {
-          "type": "string",
-          "description": "Target RPE range for this phase (e.g., '6-7')"
-        },
-        "sessions": {
-          "type": "array",
-          "description": "All sessions for all weeks in this phase, including deload weeks",
-          "items": { "$ref": "#/$defs/session" }
-        }
-      }
-    },
+  "definitions": {
     "session": {
       "type": "object",
-      "required": ["week_number", "day_number", "session_type", "is_deload", "warm_up", "blocks", "estimated_duration_minutes"],
+      "required": ["session_id", "session_type", "movement_plane", "blocks"],
       "properties": {
-        "week_number": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Week number within the phase"
+        "session_id": { "type": "string", "enum": ["A", "B", "C", "D"] },
+        "session_type": { "type": "string" },
+        "movement_plane": { "type": "string" },
+        "estimated_duration_minutes": { "type": "integer" },
+        "pull_push_count": {
+          "type": "object",
+          "properties": {
+            "pull": { "type": "integer" },
+            "push": { "type": "integer" },
+            "ratio_met": { "type": "boolean" }
+          }
         },
-        "day_number": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 7,
-          "description": "Day of the training week (1 = first training day)"
-        },
-        "session_type": {
-          "type": "string",
-          "enum": ["A", "B", "C"],
-          "description": "A = sagittal, B = frontal/rotational, C = posterior chain"
-        },
-        "is_deload": {
-          "type": "boolean"
-        },
-        "warm_up": { "$ref": "#/$defs/warm_up" },
         "blocks": {
           "type": "array",
-          "minItems": 2,
-          "maxItems": 4,
-          "items": { "$ref": "#/$defs/block" }
-        },
-        "estimated_duration_minutes": {
-          "type": "integer"
-        }
-      }
-    },
-    "warm_up": {
-      "type": "object",
-      "required": ["foam_rolling", "movement_prep", "neural_activation"],
-      "properties": {
-        "foam_rolling": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["area", "duration_seconds"],
-            "properties": {
-              "area": { "type": "string" },
-              "duration_seconds": { "type": "integer", "minimum": 30, "maximum": 90 }
-            }
-          }
-        },
-        "movement_prep": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["exercise_name", "sets", "reps"],
-            "properties": {
-              "exercise_name": { "type": "string" },
-              "sets": { "type": "integer" },
-              "reps": { "type": "string" },
-              "notes": { "type": "string" }
-            }
-          }
-        },
-        "neural_activation": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["exercise_name", "sets", "reps"],
-            "properties": {
-              "exercise_name": { "type": "string" },
-              "sets": { "type": "integer" },
-              "reps": { "type": "string" },
-              "notes": { "type": "string" }
-            }
-          }
+          "items": { "$ref": "#/definitions/block" }
         }
       }
     },
     "block": {
       "type": "object",
-      "required": ["block_label", "block_name", "exercises"],
+      "required": ["block_id", "block_name", "purpose", "duration_minutes", "exercises"],
       "properties": {
-        "block_label": {
-          "type": "string",
-          "enum": ["A", "B", "C", "D"]
-        },
-        "block_name": {
-          "type": "string",
-          "enum": ["Primary Strength", "Secondary + Rotation", "Isometric + End-Range", "Core Circuit"]
-        },
-        "execution_style": {
-          "type": "string",
-          "enum": ["straight_sets", "superset", "circuit"],
-          "description": "How exercises in this block are performed"
-        },
-        "rest_seconds": {
-          "type": "integer",
-          "description": "Rest between sets or between superset pairs"
-        },
+        "block_id": { "type": "string", "enum": ["A", "B", "C", "D", "E", "F"] },
+        "block_name": { "type": "string" },
+        "purpose": { "type": "string" },
+        "duration_minutes": { "type": "integer" },
+        "rest_between_exercises": { "type": "string" },
         "exercises": {
           "type": "array",
-          "minItems": 1,
-          "maxItems": 4,
-          "items": { "$ref": "#/$defs/exercise" }
+          "items": { "$ref": "#/definitions/exercise" }
         }
       }
     },
     "exercise": {
       "type": "object",
-      "required": ["exercise_name", "sets", "reps", "tempo", "rpe_target", "coaching_cue"],
+      "required": ["exercise_id", "name", "sets", "reps", "tempo", "rpe", "load_prescription", "rest_seconds"],
       "properties": {
-        "exercise_name": {
-          "type": "string",
-          "description": "Must match exercise bank name exactly"
-        },
-        "superset_pair": {
-          "type": "string",
-          "description": "Superset grouping label (e.g., 'B1', 'B2')",
-          "pattern": "^[A-D][1-4]$"
-        },
-        "sets": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 6
-        },
-        "reps": {
-          "type": "string",
-          "description": "Rep count, range, or duration (e.g., '10', '8-12', '30s', '5 each side')"
-        },
-        "tempo": {
-          "type": "string",
-          "description": "Eccentric-Pause-Concentric-Pause (e.g., '3-1-1-0')",
-          "pattern": "^[0-9X]-[0-9]-[0-9X]-[0-9]$"
-        },
-        "rpe_target": {
-          "type": "number",
-          "minimum": 4,
-          "maximum": 10,
-          "description": "Rate of perceived exertion target"
-        },
-        "load_prescription": {
-          "type": "string",
-          "description": "Load guidance (e.g., 'moderate — should feel challenging by rep 8', 'bodyweight', 'light band')"
-        },
-        "rest_seconds": {
-          "type": "integer",
-          "description": "Override block-level rest for this specific exercise"
-        },
-        "coaching_cue": {
-          "type": "string",
-          "description": "Key form cue or safety reminder for this exercise"
-        },
-        "progression_note": {
-          "type": "string",
-          "description": "How to progress this exercise across weeks (e.g., 'Add 2.5kg per week if all reps completed at target RPE')"
-        },
-        "equipment_required": {
+        "exercise_id": { "type": "string", "description": "e.g., A1, A2, B1, B2, B3, C1..." },
+        "name": { "type": "string" },
+        "exercise_bank_ref": { "type": "string", "description": "Reference to exercise bank ID" },
+        "sets": { "type": "integer" },
+        "reps": { "type": "string", "description": "e.g., '8-10', '5 each leg', '30s hold'" },
+        "tempo": { "type": "string", "description": "e.g., '3-1-2-0' (eccentric-pause-concentric-pause)" },
+        "rpe": { "type": "string", "description": "e.g., '7', '8-9'" },
+        "load_prescription": { "type": "string", "description": "e.g., 'BW', 'Moderate DBs', 'Heavy barbell'" },
+        "rest_seconds": { "type": "integer" },
+        "superset_with": { "type": "string", "description": "Exercise ID this is paired with, if any" },
+        "coaching_cue": { "type": "string", "description": "1-2 sentence form cue" },
+        "weekly_progression": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "Equipment tags needed for this exercise"
+          "description": "4-week progression within the phase",
+          "items": {
+            "type": "object",
+            "properties": {
+              "week": { "type": "integer" },
+              "load_adjustment": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          }
         },
-        "muscle_groups": {
+        "substitutions": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "video_demo_url": { "type": "string", "format": "uri", "description": "Populated post-generation from exercise bank" },
+        "movement_category": {
+          "type": "string",
+          "enum": ["pull", "push", "squat", "hinge", "carry", "rotation", "isometric", "plyometric", "mobility", "core", "accessory"]
+        }
+      }
+    },
+    "warm_up_protocol": {
+      "type": "object",
+      "properties": {
+        "total_duration_minutes": { "type": "integer" },
+        "sections": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": ["quads", "hamstrings", "glutes", "calves", "chest", "upper_back", "lats", "shoulders", "biceps", "triceps", "forearms", "core", "hip_flexors", "adductors", "abductors", "rotator_cuff", "full_body"]
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "duration_minutes": { "type": "integer" },
+              "exercises": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "sets": { "type": "integer" },
+                    "reps": { "type": "string" }
+                  }
+                }
+              }
+            }
           }
         }
       }

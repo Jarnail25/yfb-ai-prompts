@@ -1,0 +1,192 @@
+{
+  "version": "1.0",
+  "description": "Structured progression rules per block per phase. The AI plan generation engine loads this as a constraint set. Every generated plan must comply with these rules.",
+  "block_progressions": {
+    "A_block": {
+      "name": "Primary Strength",
+      "phase_1": {
+        "sets": "3",
+        "reps": "8-10",
+        "tempo": "3-1-2-0",
+        "rpe": "7",
+        "rest_seconds": 90,
+        "weekly_load_increase": "+5-10lbs or reduce band assistance",
+        "training_quality": "strength-endurance",
+        "note": "Controlled eccentrics. Build time under tension. Establish movement patterns."
+      },
+      "phase_2": {
+        "sets": "4",
+        "reps": "4-6",
+        "tempo": "2-1-1-0",
+        "rpe": "8-9",
+        "rest_seconds": 120,
+        "weekly_load_increase": "+5lbs/week on working weight",
+        "training_quality": "max-strength",
+        "note": "Heavy loads. Full ROM. No grinding reps."
+      },
+      "phase_3": {
+        "sets": "3",
+        "reps": "3-4 heavy + 4-5 explosive",
+        "tempo": "2-1-1-0 heavy / X-0-X-0 explosive",
+        "rpe": "8-9",
+        "rest_seconds": 90,
+        "weekly_load_increase": "Maintain heavy load, increase explosive intent",
+        "training_quality": "power-conversion",
+        "note": "Contrast pairs: heavy compound immediately followed by explosive variant. PAP effect."
+      },
+      "deload": {
+        "sets": "2",
+        "reps": "same as phase prescription",
+        "load": "60-70% of peak week",
+        "rpe": "5-6"
+      }
+    },
+    "B_block": {
+      "name": "Secondary Strength + Rotation",
+      "mandatory_exercises": {
+        "B1": "Nordic curl variant (EVERY session, ALL phases)",
+        "B2": "Pressing movement",
+        "B3": "Rotational exercise"
+      },
+      "phase_1": {
+        "sets": "2-3",
+        "reps": "6-12",
+        "tempo": "3-5s eccentrics",
+        "rpe": "7-8",
+        "rest_seconds": 60,
+        "nordic_prescription": "Eccentric-only, 3-5s lowering, hands push back up",
+        "rotation_type": "anti-rotation (Pallof, Woodchop light)",
+        "pressing_type": "moderate load, controlled tempo"
+      },
+      "phase_2": {
+        "sets": "3-4",
+        "reps": "5-8",
+        "tempo": "2-4s eccentrics",
+        "rpe": "8-9",
+        "rest_seconds": 90,
+        "nordic_prescription": "Full range with band-assisted concentric, reducing assistance weekly",
+        "rotation_type": "loaded rotation (Landmine, heavy Woodchop)",
+        "pressing_type": "heavy loads, approach failure"
+      },
+      "phase_3": {
+        "sets": "3",
+        "reps": "3-6",
+        "tempo": "1-2s eccentrics, explosive concentric",
+        "rpe": "8-9",
+        "rest_seconds": 60,
+        "nordic_prescription": "Full concentric attempted unassisted",
+        "rotation_type": "explosive rotation (Med Ball throws, explosive landmine)",
+        "pressing_type": "explosive (clap push-ups, explosive dips)"
+      }
+    },
+    "C_block": {
+      "name": "Isometric + End-Range Training",
+      "phase_1": {
+        "isometric_type": "yielding",
+        "end_range_type": "passive-to-active (PAILs/RAILs)",
+        "hold_duration": "45-60s",
+        "contract_duration": "10s each direction",
+        "rpe": "6-7",
+        "pistol_squat_progression": "High box with ring assist",
+        "note": "Long holds. Active end-range. Build flexibility through isometric contractions."
+      },
+      "phase_2": {
+        "isometric_type": "overcoming",
+        "end_range_type": "loaded stretches",
+        "hold_duration": "30-45s",
+        "max_effort_duration": "8s",
+        "rpe": "7-9",
+        "pistol_squat_progression": "Reduced ring assist, lower box",
+        "note": "Maximum effort isometric pulls/pushes against pins. Hold weight in stretch positions."
+      },
+      "phase_3": {
+        "isometric_type": "reactive",
+        "end_range_type": "dynamic end-range + maintenance",
+        "hold_duration": "20-30s",
+        "rpe": "7-8",
+        "pistol_squat_progression": "Freestanding attempt",
+        "note": "Dynamic mobility. Reactive stability. Maintain gains from P1-P2. Test pistol squat."
+      }
+    },
+    "D_block": {
+      "name": "Core Circuit",
+      "mandatory_exercises": {
+        "D1": "Anti-rotation/rotation exercise",
+        "D2_or_D3": "Spinal extensor exercise (back extension variant)",
+        "D4": "Neck strengthening (EVERY session)"
+      },
+      "phase_1": {
+        "core_type": "anti-movement (stability)",
+        "exercises_typical": ["Dead Bug", "Side Plank", "Pallof Press", "Bird Dog", "Hollow Body Hold"],
+        "neck_type": "isometric (light band/hand resistance, 10s each direction)",
+        "sets": "2",
+        "rest_seconds": 20
+      },
+      "phase_2": {
+        "core_type": "loaded (strength)",
+        "exercises_typical": ["Ab Wheel Rollout", "Copenhagen Plank", "Turkish Get-Up", "Farmer's Carry", "Weighted Back Extension"],
+        "neck_type": "dynamic reps (medium band, 8-10 each direction)",
+        "sets": "2-3",
+        "rest_seconds": 20
+      },
+      "phase_3": {
+        "core_type": "explosive (power)",
+        "exercises_typical": ["Hanging Leg Raise", "Med Ball Slam", "Dynamic Plank", "L-Sit Hold", "Explosive Back Extension"],
+        "neck_type": "heavy dynamic (heavy band/harness, 10-12 each direction, sport speed)",
+        "sets": "2-3",
+        "rest_seconds": 20
+      }
+    },
+    "E_block": {
+      "name": "Hypertrophy",
+      "session_specific_selection": {
+        "session_A": ["biceps (curl variant)", "lateral raise", "quad accessory (leg extension/sissy squat)"],
+        "session_B": ["triceps (OH extension/dip/skull crusher)", "rear delt fly", "traps (shrug/Y-raise)"],
+        "session_C": ["row variant (high rep)", "glute (hip thrust/bridge)", "lat (pullover/pulldown)"],
+        "session_D": ["combo movement (curl+press)", "band pull-apart (high rep)"]
+      },
+      "phase_1": { "sets": "2", "reps": "12-15", "rpe": "7", "note": "Mind-muscle connection, light-moderate" },
+      "phase_2": { "sets": "3", "reps": "10-12", "rpe": "8", "note": "Heavier, approach failure on last set" },
+      "phase_3": { "sets": "2", "reps": "8-12", "rpe": "8-9", "note": "Intensity techniques: drop sets, supersets" }
+    },
+    "F_block": {
+      "name": "Accessory — Tendon Health & Grip",
+      "distribution_rule": {
+        "lower_emphasis_days": {
+          "sessions": ["A", "C"],
+          "exercises": [
+            { "id": "F1", "name": "Single-Leg Calf Raise", "target": "gastrocnemius/soleus/Achilles tendon" },
+            { "id": "F2", "name": "Tibialis Raise", "target": "tibialis anterior/ankle stability" }
+          ]
+        },
+        "upper_emphasis_days": {
+          "sessions": ["B", "D"],
+          "exercises": [
+            { "id": "F1", "name": "Dead Hang", "target": "grip endurance/spine decompression" },
+            { "id": "F2", "name": "Wrist Roller", "target": "forearm strength/grip (grappling-specific)" }
+          ]
+        }
+      },
+      "phase_1": { "sets": "2", "reps": "12-15 or 30-45s hold", "load": "bodyweight", "tempo": "3s eccentric", "rpe": "6-7" },
+      "phase_2": { "sets": "2", "reps": "10-12 or 30-45s hold", "load": "banded/weighted", "tempo": "controlled", "rpe": "7-8" },
+      "phase_3": { "sets": "2", "reps": "8-10 + 10s hold or 30-60s hold", "load": "heavy", "tempo": "explosive + isometric", "rpe": "8" }
+    }
+  },
+  "warm_up_progressions": {
+    "phase_1": {
+      "duration_minutes": 15,
+      "components": ["Foam Roll (5min)", "Movement Prep (5min)", "CARs hips+shoulders (2min)", "Band Activation: pull-aparts + external rotation (2min)"],
+      "cressey_influence": "Movement preparation sequence from Show and Go. Foam rolling → movement prep → neural activation."
+    },
+    "phase_2": {
+      "duration_minutes": 15,
+      "components": ["Foam Roll (3min)", "Movement Prep (4min)", "CARs full body (2min)", "Overcoming Isometrics 3 positions 2x8s (3min)", "Band Activation (2min)"],
+      "note": "Overcoming isometrics introduced in warm-up to prime neural system for heavy lifting."
+    },
+    "phase_3": {
+      "duration_minutes": 15,
+      "components": ["Foam Roll (2min)", "Movement Prep (3min)", "CARs (2min)", "Overcoming Isos (2min)", "Neural Activation: jump/explosive movement 2x3 (3min)", "Band Activation (2min)"],
+      "note": "Plyometric/explosive activation added. Prepares CNS for contrast training."
+    }
+  }
+}

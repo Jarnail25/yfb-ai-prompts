@@ -28,6 +28,32 @@ Your Fitness Buddy takes everything a world-class personal trainer knows — per
 
 2.2 Competitive Differentiation
 
+### What Makes YFB Different
+
+1. **Real Periodization, Not Random Workouts:** Competitors (Fitbod, Caliber, Dr. Muscle, Juggernaut AI) generate individual workouts or use linear progression. YFB generates complete 12-week periodized macrocycles with phase-specific training qualities (foundation → accumulation → realization). The AI understands that Week 6 should feel fundamentally different from Week 2 — not just heavier.
+
+2. **Methodology-First, Not Algorithm-First:** Most AI fitness apps use generic exercise databases and machine learning to suggest exercises. YFB encodes a specific, opinionated methodology (Cressey-influenced, pull-dominant, isometric-progressive) into the AI's system prompt. This means every plan follows the same principles a top-tier S&C coach would use — not what a recommendation engine thinks is popular.
+
+3. **Full Session Architecture:** Competitors typically program main lifts and leave accessory work random. YFB generates complete sessions with 6 defined blocks (A through F), warm-up protocols, and session-specific exercise selection. Every training quality (strength, power, mobility, core, hypertrophy, tendon health) is programmed into every session.
+
+4. **Injury-Aware Programming:** Not just "avoid this exercise." YFB builds prehab INTO the plan structure: Nordic curls for ACL history, scapular work for shoulder issues, pelvic floor-safe progressions for postpartum. The AI references injury-specific constraint rules, not generic flags.
+
+5. **White-Label AI Coach:** The coach persona is NOT presented as AI. It's a named, consistent personality with domain expertise. No competitor offers this level of persona consistency.
+
+6. **Niche Depth:** YFB targets 100+ fitness niches (postpartum, ACL rehab, martial arts, desk job athletes, etc.) with specific programming rules per niche. Competitors treat everyone like a general fitness client.
+
+### Competitive Landscape
+
+| Feature | YFB | Fitbod | Caliber | Juggernaut AI | TrainHeroic | Dr. Muscle |
+|---------|-----|--------|---------|--------------|-------------|------------|
+| Periodized macrocycle | 3-phase | Per-workout | Coach-dependent | Basic | Template-based | Per-set |
+| Methodology-driven | Encoded | ML-based | Coach-dependent | Partial | Template | Algorithm |
+| Full session blocks (A-F) | Yes | No | No | No | No | No |
+| AI coaching persona | White-label | No | No | No | No | No |
+| Injury-aware prehab | Built-in | Basic flags | Coach-dependent | No | No | Basic |
+| Blood panel integration | Yes | No | No | No | No | No |
+| Marketplace | Yes | No | No | No | No | No |
+
 2.3 Target Market: 100+ Niches at Scale
 Rather than targeting one customer avatar, the quiz funnel dynamically identifies and serves users across a matrix of dimensions:
 
@@ -237,12 +263,65 @@ The following training principles are encoded into the AI's system prompt and pl
 • Deload: Every 4th week (40-50% volume reduction)
 • Exercise selection: Drawn from a curated exercise bank (linked to Eric Cressey resources + founder's preferred movements)
 
+### 5.2.1 Block Taxonomy (v3.1)
+
+Every standard session (A, B, C) contains 6 execution blocks in fixed order:
+
+- **A Block — Primary Strength** (15-18 min): Main compound lift + antagonist superset. Phase determines rep range: P1 3×8-10, P2 4×4-6, P3 3×3-4 + explosive contrast.
+- **B Block — Secondary + Rotation** (12-15 min): 3 exercises. Nordic curl in B1 (mandatory — ACL prehab), pressing in B2, rotation in B3.
+- **C Block — Isometric + End-Range** (10-12 min): 3-4 exercises. Progression: yielding (P1) → overcoming (P2) → reactive (P3). Pistol squat progression tracked here.
+- **D Block — Core Circuit** (8-10 min): 3-4 exercises. Anti-movement (P1) → loaded (P2) → explosive (P3). Neck work in D4 every session.
+- **E Block — Hypertrophy** (8-10 min): 2-3 exercises. Session-specific selection (NOT identical across sessions). Joint protection and aesthetic work.
+- **F Block — Accessory** (8-10 min): 2 exercises per session. DISTRIBUTED across the week: calf/tibialis on lower days (A,C), dead hang/wrist roller on upper days (B,D). Never all 4 accessories in one session.
+
+Session D uses a unique phase-specific structure (not the standard A-F template). See `block-taxonomy.md`.
+
+### 5.2.2 Accessory Distribution Rule (v3.1)
+
+The AI plan generation engine MUST distribute F Block exercises strategically:
+- Sessions A & C (lower emphasis): SL Calf Raise + Tibialis Raise
+- Sessions B & D (upper emphasis): Dead Hang + Wrist Roller
+
+This ensures 2x/week frequency for each accessory pair while keeping individual sessions to 2 F Block exercises (not 4). Programming all 4 accessories in every session adds 8 unnecessary sets and was identified as a critical programming error during methodology validation.
+
+### 5.2.3 E Block Session Specificity (v3.1)
+
+E Block exercises MUST vary by session to target different muscle groups:
+- Session A: Biceps, Lateral Raise, Quad accessory
+- Session B: Triceps, Rear Delt, Traps
+- Session C: Rows (high rep), Glutes, Lats
+- Session D: Combo movements, Band Pull-Aparts
+
+### 5.2.4 Mandatory Session Inclusions (v3.1)
+
+Regardless of user profile, every generated plan MUST include:
+1. Nordic curl variant in B1 position of every session (ACL prehab)
+2. Neck strengthening in D4 position of every session (martial arts/sport safety)
+3. CARs (hips + shoulders) in every warm-up
+4. Band pull-aparts in every warm-up
+5. Pull-to-push ratio ≥ 3:2 verified per session
+
 5.3 Plan Generation Flow
 1. Quiz completion triggers plan generation
 2. System constructs an AI prompt containing: full user profile, methodology framework, exercise bank, constraints (equipment, injuries, time, frequency)
 3. Claude API generates the complete plan (all phases, all sessions, all weeks, all exercises with sets/reps/tempo/load/RPE/progression notes)
 4. Plan is parsed and stored in Supabase as structured data (not raw text)
 5. User sees plan in the app as interactive sessions they can navigate and log against
+6. AI validates generated plan against `plan-generation-constraints.md` (15-point checklist)
+7. Plan is structured as JSON per `plan-generation-output-schema.json` with validation_checks object confirming all constraints pass
+8. If any validation check fails, the AI corrects the plan and re-validates before storing
+
+### 5.3.1 Constraint Files (v3.1)
+
+The plan generation system prompt references these files from `yfb-ai-prompts/prompts/plan-generation/`:
+
+| File | Purpose |
+|------|---------|
+| `plan-generation-constraints.md` | 15-point validation checklist (hard rules) |
+| `output-schema.json` | Exact JSON structure for Supabase storage |
+| `progression-rules.json` | Per-block, per-phase progression rules |
+| `block-taxonomy.md` | Complete block structure reference |
+| `exercise-bank-schema.json` | Exercise database with categories, equipment, substitutions |
 
 5.4 Semi-Adaptive Adjustment System
 The plan is NOT static once generated. The AI monitors logged performance and suggests adjustments:
@@ -558,6 +637,31 @@ Brand identity needs to be built from scratch. The design system must feel premi
 
 19.1 Brand Identity Requirements
 
+### Visual Identity
+
+**Color Palette:**
+- Primary: Deep Navy (#1B2A4A) — trust, authority, premium feel
+- Accent: Electric Teal (#00C9A7) — energy, health, modern
+- Warm: Coral (#FF6B6B) — motivation, intensity markers
+- Background: Off-white (#F8F9FA) — clean, breathable
+- Dark mode: Charcoal (#1E1E2E) with same accent colors
+
+**Typography:**
+- Headings: Inter (bold weight) — clean, modern, tech-forward
+- Body: Inter (regular) — excellent readability
+- Data/Numbers: JetBrains Mono — workout stats, timers, rep counters
+
+**UI Personality:**
+- Clean, not clinical. Athletic, not aggressive. Premium, not minimalist-for-the-sake-of-it.
+- Reference apps for inspiration: Whoop (data presentation), Peloton (motivation/community feel), Calm (premium simplicity), Notion (information density done right)
+- Dark mode is the default for gym use (OLED-friendly, low eye strain under fluorescent lights)
+- Animations: subtle, purposeful. Progress rings fill on log completion. Session blocks slide in sequentially.
+
+**AI Coach Visual Persona:**
+- No robot avatars, no generic fitness stock photos
+- The coach persona has a custom illustrated avatar (commissioned post-MVP)
+- Chat interface looks like iMessage, not a help desk
+
 19.2 Dark Mode Specification
 Default: Dark mode. User can toggle to light mode. Preference persisted in local storage + Supabase user settings.
 
@@ -651,6 +755,39 @@ Framework: next-intl with JSON locale files. All user-facing strings extracted t
 
 23.1 Error Handling & Resilience
 
+### Claude API Failures
+
+**Scenario:** Claude API returns 500 or times out after 30s during plan generation.
+**User sees:** Full-screen message: "Your coach is putting the finishing touches on your plan. This is taking a bit longer than usual. We'll keep trying."
+**System behavior:** Exponential backoff retry (5s, 15s, 30s, 60s). After 4 failed attempts, show: "We couldn't generate your plan right now. Your quiz answers are saved — we'll have your plan ready within the next hour. We'll send a push notification when it's done."
+**Backend:** Queue the generation request in a retry table. Background worker retries every 15 minutes for 4 hours. If still failing, alert the ops team.
+
+**Scenario:** Claude API fails during coach chat.
+**User sees:** "Your coach stepped away for a moment. Your message is saved — they'll respond shortly." with retry button.
+**System behavior:** 3 retries with 5s backoff. After failure, queue message for async response.
+
+### Stripe Failures
+
+**Scenario:** Stripe checkout fails mid-payment.
+**User sees:** "We couldn't process your payment. Your cart is saved. Please try again or use a different payment method." No cart data is lost.
+**System behavior:** Log error to PostHog. Never show raw Stripe error messages to user. Retry on user's next attempt.
+
+**Scenario:** Subscription renewal fails.
+**User sees:** Email + in-app banner: "Your subscription payment failed. Update your payment method to keep your plan active." 3-day grace period before downgrade.
+
+### Supabase Outage
+
+**Scenario:** Supabase is unreachable during workout logging.
+**User sees:** Nothing changes — session continues offline.
+**System behavior:** All workout data cached in local storage (IndexedDB). Sync queue builds. When connection restores, sync all cached data with conflict resolution (local wins if newer). This is critical — gym basements have poor signal.
+
+### Graceful Degradation Priority
+
+1. Workout logging MUST work offline (highest priority — never lose a user's training data)
+2. Coach chat degrades to queued messages (async is acceptable)
+3. Plan generation degrades to queued generation (async is acceptable)
+4. Marketplace degrades to "temporarily unavailable" message
+
 23.2 Security
 • AUTHENTICATION: Supabase Auth with email/password + social (Google, Apple). Email verification required. Password requirements: 8+ chars, 1 uppercase, 1 number.
 • ROW LEVEL SECURITY (RLS): Supabase RLS policies on every table. Users can only read/write their own data. Admin role has elevated access via custom claims.
@@ -661,6 +798,40 @@ Framework: next-intl with JSON locale files. All user-facing strings extracted t
 • CSRF/XSS: Next.js built-in CSRF protection. Content Security Policy headers. No dangerouslySetInnerHTML.
 
 23.3 Performance Targets
+
+### Web Vitals Budgets
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| LCP (Largest Contentful Paint) | < 2.5s | 75th percentile, mobile 4G |
+| FID (First Input Delay) | < 100ms | 75th percentile |
+| CLS (Cumulative Layout Shift) | < 0.1 | 75th percentile |
+| TTFB (Time to First Byte) | < 800ms | Vercel Edge Network |
+
+### Feature-Specific Targets
+
+| Feature | Target | Notes |
+|---------|--------|-------|
+| Quiz page load | < 1.5s | Pre-rendered, no API calls until interaction |
+| Plan generation | < 45s | User sees progress animation during generation |
+| Coach chat response | < 5s | Sonnet model, streaming response displayed as typing |
+| Session logger load | < 2s | Today's session pre-fetched on app open |
+| Workout log save | < 1s | Optimistic UI — show saved immediately, sync async |
+| Exercise swap | < 2s | Substitution list pre-cached |
+| Dashboard load | < 3s | Charts rendered client-side from cached data |
+
+### Bundle Size Budgets
+
+| Route | JS Budget | Notes |
+|-------|-----------|-------|
+| Landing page | < 100KB | Static, no heavy dependencies |
+| Quiz | < 150KB | Multi-step form, conditional logic |
+| Session logger | < 200KB | Timer, logging UI, exercise data |
+| Dashboard | < 250KB | Charting library (Recharts) |
+
+### CI Enforcement
+
+All performance budgets are enforced in the GitHub Actions CI pipeline. PRs that exceed budgets are blocked with a descriptive error. The DevOps Agent configures Lighthouse CI in `.github/workflows/ci.yml`.
 
 23.4 Testing Strategy
 • AI PLAN VALIDATION: Build a test suite of 20+ persona profiles covering edge cases (multiple injuries + minimal equipment + beginner, advanced athlete + sport-specific + desk job, etc.). Generate plans for each. Human review for safety and quality. Automated checks for: no contraindicated exercises for flagged injuries, correct phase structure, pull-to-push ratio enforcement, deload week presence.
