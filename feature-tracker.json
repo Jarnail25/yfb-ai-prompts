@@ -1,6 +1,6 @@
 {
   "project": "yfb-ai-prompts",
-  "last_updated": "2026-03-15",
+  "last_updated": "2026-03-16",
   "current_sprint": "sprint-4",
   "features": {
     "training_methodology": {
@@ -34,12 +34,12 @@
       "notes": "v3.1 addition (2026-03-01). 5 new files: block-taxonomy.md, plan-generation-constraints.md, exercise-bank-schema.json, progression-rules.json. Provides structured data and hard validation rules for AI plan generation."
     },
     "plan_few_shot_examples": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 5,
       "deps": [
         "plan_output_schema"
       ],
-      "notes": "prompts/plan-generation/examples/. 3-5 complete plan examples for diverse user profiles. Low priority — generate-plan works well without them."
+      "notes": "prompts/plan-generation/examples/. 3 examples created (2026-03-16): (1) commercial gym intermediate no injury — baseline all 6 blocks, (2) home gym beginner lower back — equipment + injury adaptations, (3) advanced anterior shoulder impingement — pressing substitutions. README.md explains injection pattern for Edge Function."
     },
     "coach_personality": {
       "status": "complete",

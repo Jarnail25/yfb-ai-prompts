@@ -5,6 +5,16 @@ AI Agent: update this file with EVERY prompt modification.
 
 ---
 
+## 2026-03-16 — v4.1 (Few-Shot Plan Examples)
+
+- Added `prompts/plan-generation/examples/README.md` — documents usage pattern for Edge Function injection
+- Added `examples/example-01-commercial-gym-intermediate.md` — complete Phase 1 Session A (all 6 blocks), Phase 2/3 as progression deltas, warm_ups + deload_protocol + readiness_assessment. Baseline for no-injury commercial gym profile.
+- Added `examples/example-02-home-gym-beginner-lower-back.md` — home gym equipment substitutions (no barbell, DBs + bands), lower back injury protocol (McGill Big 3 mandatory, no bilateral heavy hinging, BW back extension only P1). Shows beginner load prescription and Nordic regression.
+- Added `examples/example-03-advanced-shoulder-impingement.md` — anterior shoulder impingement substitutions (landmine press replaces OHP, face pull mandatory every warm-up, no upright row, pull-dominant skew). Includes substitution reference table.
+- Feature tracker updated: plan_few_shot_examples → complete
+
+---
+
 ## 2026-02-08 — v1.0 (Initial Bootstrap)
 - Created repository structure with multi-agent orchestration
 - Added CLAUDE.md with AI Agent instructions (v2 — multi-agent aware)
