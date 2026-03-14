@@ -1,98 +1,90 @@
 {
   "project": "yfb-ai-prompts",
-  "last_updated": "2026-03-01",
-  "last_agent": "ai-agent",
+  "last_updated": "2026-03-14",
   "current_sprint": "sprint-3",
   "features": {
     "training_methodology": {
       "status": "complete",
       "sprint": 1,
-      "owner": "ai-agent",
       "deps": [],
-      "notes": "prompts/plan-generation/methodology.md — GROUND TRUTH. Periodization rules, exercise selection philosophy. Created in Session 1 (2026-02-08)."
+      "notes": "prompts/plan-generation/methodology.md \u2014 GROUND TRUTH. Periodization rules, exercise selection philosophy. Created in Session 1 (2026-02-08)."
     },
     "plan_system_prompt": {
       "status": "complete",
       "sprint": 3,
-      "owner": "ai-agent",
-      "deps": ["training_methodology"],
+      "deps": [
+        "training_methodology"
+      ],
       "notes": "prompts/plan-generation/system-prompt.md + exercise-selection.md + injury-protocols.md. Created in Session 1 (2026-02-08)."
     },
     "plan_output_schema": {
       "status": "complete",
       "sprint": 3,
-      "owner": "ai-agent",
-      "deps": ["plan_system_prompt"],
+      "deps": [
+        "plan_system_prompt"
+      ],
       "notes": "prompts/plan-generation/output-schema.json. UPGRADED to v3.1 (2026-03-01): 6-block A-F structure, validation_checks, warm_ups, deload_protocol, readiness_assessment, weekly_progression, substitutions per exercise."
     },
     "plan_constraint_files": {
       "status": "complete",
       "sprint": 3,
-      "owner": "ai-agent",
-      "deps": ["plan_system_prompt"],
+      "deps": [
+        "plan_system_prompt"
+      ],
       "notes": "v3.1 addition (2026-03-01). 5 new files: block-taxonomy.md, plan-generation-constraints.md, exercise-bank-schema.json, progression-rules.json. Provides structured data and hard validation rules for AI plan generation."
     },
     "plan_few_shot_examples": {
       "status": "not_started",
       "sprint": 3,
-      "owner": "ai-agent",
-      "deps": ["plan_output_schema"],
+      "deps": [
+        "plan_output_schema"
+      ],
       "notes": "prompts/plan-generation/examples/. 3-5 complete plan examples for diverse user profiles."
     },
     "coach_personality": {
       "status": "not_started",
       "sprint": 4,
-      "owner": "ai-agent",
       "deps": [],
-      "notes": "prompts/coach-chat/personality.md — GROUND TRUTH for coach voice."
+      "notes": "prompts/coach-chat/personality.md \u2014 GROUND TRUTH for coach voice."
     },
     "coach_system_prompt": {
       "status": "not_started",
       "sprint": 4,
-      "owner": "ai-agent",
-      "deps": ["coach_personality"],
+      "deps": [
+        "coach_personality"
+      ],
       "notes": "prompts/coach-chat/system-prompt.md + boundaries.md."
     },
     "coach_checkin_templates": {
       "status": "not_started",
       "sprint": 4,
-      "owner": "ai-agent",
-      "deps": ["coach_system_prompt"],
+      "deps": [
+        "coach_system_prompt"
+      ],
       "notes": "prompts/coach-chat/check-in-templates/. Weekly automated messages."
-    },
-    "supplement_prompts": {
-      "status": "not_started",
-      "sprint": 5,
-      "owner": "ai-agent",
-      "deps": [],
-      "notes": "prompts/supplement-analysis/system-prompt.md + marker-reference.md."
-    },
-    "nutrition_prompts": {
-      "status": "not_started",
-      "sprint": 5,
-      "owner": "ai-agent",
-      "deps": [],
-      "notes": "prompts/nutrition/system-prompt.md + meal-plan-rules.md."
     },
     "test_personas": {
       "status": "in_progress",
       "sprint": 1,
-      "owner": "ai-agent",
       "deps": [],
-      "notes": "tests/personas/. 3 personas created (2026-02-08): beginner-knee-injury-home-gym, advanced-martial-artist-full-gym, senior-multiple-injuries-minimal-equip. Target: 20+."
+      "notes": "tests/personas/. 3 personas created (2026-02-08): beginner-knee-injury-home-gym, advanced-martial-artist-full-gym, senior-multiple-injuries-minimal-equip. Target: 8+"
     },
     "plan_validation_tests": {
       "status": "not_started",
       "sprint": 6,
-      "owner": "ai-agent",
-      "deps": ["plan_output_schema", "test_personas"],
+      "deps": [
+        "plan_output_schema",
+        "test_personas"
+      ],
       "notes": "tests/plan-validation.ts. Automated safety checks on generated plans."
     },
     "coach_behavior_tests": {
       "status": "not_started",
       "sprint": 6,
-      "owner": "ai-agent",
-      "deps": ["coach_system_prompt", "test_personas"],
+      "deps": [
+        "coach_system_prompt",
+        "test_personas"
+      ],
       "notes": "tests/coach-behavior.ts. Coach stays in character, within boundaries."
     }
   },
