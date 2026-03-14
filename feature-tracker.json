@@ -1,13 +1,13 @@
 {
   "project": "yfb-ai-prompts",
-  "last_updated": "2026-03-14",
-  "current_sprint": "sprint-3",
+  "last_updated": "2026-03-15",
+  "current_sprint": "sprint-4",
   "features": {
     "training_methodology": {
       "status": "complete",
       "sprint": 1,
       "deps": [],
-      "notes": "prompts/plan-generation/methodology.md \u2014 GROUND TRUTH. Periodization rules, exercise selection philosophy. Created in Session 1 (2026-02-08)."
+      "notes": "prompts/plan-generation/methodology.md — GROUND TRUTH. Periodization rules, exercise selection philosophy. Created in Session 1 (2026-02-08)."
     },
     "plan_system_prompt": {
       "status": "complete",
@@ -35,39 +35,39 @@
     },
     "plan_few_shot_examples": {
       "status": "not_started",
-      "sprint": 3,
+      "sprint": 5,
       "deps": [
         "plan_output_schema"
       ],
-      "notes": "prompts/plan-generation/examples/. 3-5 complete plan examples for diverse user profiles."
+      "notes": "prompts/plan-generation/examples/. 3-5 complete plan examples for diverse user profiles. Low priority — generate-plan works well without them."
     },
     "coach_personality": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 4,
       "deps": [],
-      "notes": "prompts/coach-chat/personality.md \u2014 GROUND TRUTH for coach voice."
+      "notes": "prompts/coach-chat/personality.md — GROUND TRUTH for coach voice. Created 2026-03-15. Direct but warm, evidence-based, adaptive by context. 6 non-negotiable character rules (no filler openers/closers, always specific, never guilt-trip). Includes tone by situation table and language style guide."
     },
     "coach_system_prompt": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 4,
       "deps": [
         "coach_personality"
       ],
-      "notes": "prompts/coach-chat/system-prompt.md + boundaries.md."
+      "notes": "prompts/coach-chat/system-prompt.md + boundaries.md. Created 2026-03-15. Full 6-block methodology embedded in system prompt. Boundaries: can do (training, recovery principles, general nutrition, injury management), cannot do (diagnose, prescribe, create meal plans, write new training plans). Grey-area handling table included. Model: claude-sonnet-4-20250514, max_tokens=2048."
     },
     "coach_checkin_templates": {
-      "status": "not_started",
+      "status": "complete",
       "sprint": 4,
       "deps": [
         "coach_system_prompt"
       ],
-      "notes": "prompts/coach-chat/check-in-templates/. Weekly automated messages."
+      "notes": "prompts/coach-chat/check-in-templates/weekly-checkin.md. Created 2026-03-15. Main weekly template + 3 variants: missed sessions, deload week reminder, phase transition. Includes example output for testing."
     },
     "test_personas": {
-      "status": "in_progress",
+      "status": "complete",
       "sprint": 1,
       "deps": [],
-      "notes": "tests/personas/. 3 personas created (2026-02-08): beginner-knee-injury-home-gym, advanced-martial-artist-full-gym, senior-multiple-injuries-minimal-equip. Target: 8+"
+      "notes": "tests/personas/. 8 personas exist: beginner-knee-injury-home-gym, advanced-martial-artist-full-gym, senior-multiple-injuries-minimal-equip, advanced-lifter-plateau, desk-worker-knee-pain, martial-artist-shoulder, postpartum-return, senior-beginner. Target of 8+ met."
     },
     "plan_validation_tests": {
       "status": "not_started",
@@ -93,15 +93,9 @@
       "type": "schema",
       "name": "plan-generation-output-schema.json",
       "version": "3.1",
-      "breaking_changes": "Blocks expanded from A-D to A-F. validation_checks object added to plan_metadata. warm_ups, deload_protocol, readiness_assessment now required top-level fields. Backend generate-plan Edge Function must be updated to match.",
-      "notes": "Backend Agent: the existing generate-plan function parses against the old 4-block schema. Must update to handle 6 blocks (E: Hypertrophy, F: Accessory) and new top-level fields."
+      "breaking_changes": "Blocks expanded from A-D to A-F. validation_checks object added to plan_metadata. warm_ups, deload_protocol, readiness_assessment now required top-level fields.",
+      "notes": "Backend generate-plan Edge Function updated to v3.1 (2026-03-15, deployed as version 4, ACTIVE). Fully handles 6 blocks, session templates, nested exercises, exercise_bank_ref, deload halving."
     }
   },
-  "blockers": [
-    {
-      "feature": "plan_output_schema",
-      "blocker": "Backend generate-plan Edge Function still uses old 4-block output schema. Must be updated to parse v3.1 schema with 6 blocks + validation_checks.",
-      "severity": "blocking"
-    }
-  ]
+  "blockers": []
 }

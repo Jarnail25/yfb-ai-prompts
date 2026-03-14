@@ -27,6 +27,26 @@ AI Agent: update this file with EVERY prompt modification.
 
 ---
 
+## 2026-03-15 — v4.0 (Coach Prompts + Backend v3.1 Unblock)
+
+### Coach Chat Prompts (Sprint 4 — all new)
+- **`prompts/coach-chat/personality.md`** — GROUND TRUTH for coach voice. Direct but warm persona, evidence-based, no filler affirmations. Tone-by-situation table (PR/PR miss/injury/complex programming/off-topic). Language style guide (Australian English, no motivational clichés). 6 non-negotiable character rules.
+- **`prompts/coach-chat/system-prompt.md`** — Full coach system prompt. Embeds 6-block methodology, periodization phases, movement priorities (pull:push 3:2, lunge-dominant, Nordic curls). Response rules: 2-4 paragraphs default, injury → physio referral, readiness ≤3 → reduce intensity 10-15%. Implementation notes for backend maintainers.
+- **`prompts/coach-chat/boundaries.md`** — Explicit coach scope. Can: training, recovery, general nutrition principles, injury management (not diagnosis). Cannot: diagnose, prescribe supplements/meds, create meal plans, write new training plans. Grey-area handling table for 6 common edge cases.
+- **`prompts/coach-chat/check-in-templates/weekly-checkin.md`** — Weekly check-in system prompt template. Main template + 3 variants: missed sessions, deload week reminder, phase transition. Includes example output for testing.
+
+### Backend Unblock
+- generate-plan Edge Function rewritten to v3.1 schema (deployed as version 4, ACTIVE 2026-03-15). Blocking blocker in feature-tracker cleared. Session templates, 6 blocks, nested exercises, exercise_bank_ref, deload halving all implemented.
+
+### Feature Tracker
+- `coach_personality`: not_started → complete
+- `coach_system_prompt`: not_started → complete
+- `coach_checkin_templates`: not_started → complete
+- `test_personas`: in_progress → complete (8 personas exist, target met)
+- Cleared blocking blocker for `plan_output_schema`
+
+---
+
 ## 2026-03-01 — v3.1 (Training Methodology Integration Update)
 
 Bridges the gap between the battle-tested training methodology (validated through the 12-Week Training Tracker build) and the AI plan generation system. Adds structured data, schemas, and rules the AI engine needs to generate plans at hand-built quality.
